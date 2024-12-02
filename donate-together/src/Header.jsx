@@ -14,22 +14,22 @@ import Button from "./components/Button";
 
 function Header() {
   const navItems = [
-    { id: "home", label: "홈", icon: <FaHome />, to: "/" },
-    { id: "donate", label: "같이기부", icon: <FaInfoCircle />, to: "/donate" },
+    { id: "home", label: "같이기부", icon: <FaHome />, to: "/" },
     {
       id: "campaign",
       label: "캠페인",
       icon: <FaInfoCircle />,
       to: "/campaign",
     },
+    { id: "mydonate", label: "나의기부", icon: <FaInfoCircle />, to: "/mydonate" },
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   return (
-    <header className="sticky top-0 bg-white px-4 z-30">
-      <div className="container mx-auto flex justify-between items-center h-14">
+    <header className="sticky top-0 bg-slate-100 px-4 z-30 border-b-2">
+      <div className="container mx-auto flex justify-between items-center h-20">
         <div>
-          <Link to="/" className="text-xl font-bold">
+          <Link to="/" className="text-2xl font-bold">
             Donate Together
           </Link>
         </div>

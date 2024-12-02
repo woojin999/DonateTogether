@@ -8,9 +8,10 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "db": "json-server data/db.json -p 8000"
+    "db": "json-server data/db.json -p 8001"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.62.0",
     "axios": "^1.7.8",
     "dayjs": "^1.11.13",
     "json-server": "^0.17.4",
