@@ -5,6 +5,7 @@ import Loading from "../components/Loading";
 import Error from "../components/Error";
 import { getDonates } from "../api/donate";
 import CategoryFilter from "../components/CategoryFilter";
+import { FaPencilAlt } from "react-icons/fa";
 
 function Home(props) {
   const [filter, setFilter] = useState({
@@ -43,6 +44,15 @@ function Home(props) {
       </div>
       {isLoading && <Loading />}
       {error && <Error message={error.message} onRetry={refetch} />}
+      <div className="flex gap-5">
+        <h3 className="text-2xl font-extrabold mb-5">
+          진행중 모금함 {data.length}
+        </h3>
+        <div className="flex gap-1 items-center mb-4 cursor-pointer">
+          <FaPencilAlt className="" />
+          <h3 className="underline text-lg">모금 제안</h3>
+        </div>
+      </div>
       {!isLoading && !error && (
         <DonateList
           filteredData={data}

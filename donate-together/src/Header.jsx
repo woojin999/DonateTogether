@@ -26,14 +26,14 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   return (
-    <header className="sticky top-0 bg-slate-100 px-4 z-30 border-b-2">
+    <header className="sticky top-0 bg-white px-4 z-30 border-b-2">
       <div className="container mx-auto flex justify-between items-center h-20">
         <div>
           <Link to="/" className="text-2xl font-bold">
             Donate Together
           </Link>
         </div>
-        <nav className="hidden sm:flex space-x-8">
+        <nav className="hidden md:flex space-x-8">
           {navItems.map((item) => (
             <NavLink
               key={item.id}
@@ -44,16 +44,15 @@ function Header() {
             </NavLink>
           ))}
         </nav>
-        <div className="flex gap-3">
+        <div className="flex gap-3 w-48 justify-end">
           <button className="">
             <FaSearch className="size-5 hover:text-gray-800 " />
           </button>
-          {/* <Button className="hidden md:block">Login</Button> */}
           <button>
-            <FaUserCircle className="size-5 hover:text-gray-800 " />
+            <FaUserCircle className="size-6 hover:text-gray-800 " />
           </button>
           <button className="" onClick={toggleMenu}>
-            <FaBars className="size-5 hover:text-gray-800 " />
+            <FaBars className="size-6 hover:text-gray-800 " />
           </button>
         </div>
       </div>
