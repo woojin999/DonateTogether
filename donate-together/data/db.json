@@ -60,21 +60,5 @@
       "lastModified": "2024-11-29",
       "category": "동물"
     }
-  ],
-  "test2": [
-    {
-      "id": 2,
-      "title": "환경 데이터",
-      "lastModified": "2024-11-29",
-      "category": "환경"
-    }
-  ],
-  "test3": [
-    {
-      "id": 3,
-      "title": "장애인 데이터",
-      "lastModified": "2024-11-29",
-      "category": "장애인"
-    }
   ]
 }
