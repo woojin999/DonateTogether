@@ -6,10 +6,10 @@ import Error from "../components/Error";
 import { getDonates } from "../api/donate";
 import CategoryFilter from "../components/CategoryFilter";
 import { FaPencilAlt } from "react-icons/fa";
+import { initDonateData } from "../../func/donate_fn";
 
 function Home(props) {
   const [filter, setFilter] = useState({
-    categoryText: undefined,
     category: undefined,
   });
   const handleFilter = (key, value) =>
@@ -22,13 +22,19 @@ function Home(props) {
 
   const [localCategoryText, setLocalCategoryText] = useState("");
 
-  // 데이터 조회리스트
+  // initDonateData();
 
+  // const baseData = JSON.parse(localStorage.getItem("donate-data")).donates;
+  // console.log(baseData);
+  
+  // console.log(getDonates());
+  
+  
+  // 데이터 조회리스트
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ["donates", filter.categoryText, filter.category],
+    queryKey: ["donates", filter.category],
     queryFn: () =>
       getDonates({
-        title_like: filter.categoryText,
         category: filter.category,
       }),
     initialData: [],
@@ -56,7 +62,6 @@ function Home(props) {
       {!isLoading && !error && (
         <DonateList
           filteredData={data}
-          categoryText={filter.categoryText}
           isGridView={isGridView}
         />
       )}

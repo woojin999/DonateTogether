@@ -1,7 +1,7 @@
 import React from "react";
 import DonateItem from "./DonateItem";
 
-function donateList({ filteredData, isGridView }) {
+function donateList({ filteredData, isGridView}) {
   return (
     <div
       className={`grid gap-6 ${
