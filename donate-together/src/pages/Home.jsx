@@ -22,13 +22,6 @@ function Home(props) {
 
   const [localCategoryText, setLocalCategoryText] = useState("");
 
-  // initDonateData();
-
-  // const baseData = JSON.parse(localStorage.getItem("donate-data")).donates;
-  // console.log(baseData);
-  
-  // console.log(getDonates());
-  
   
   // 데이터 조회리스트
   const { data, isLoading, error, refetch } = useQuery({
