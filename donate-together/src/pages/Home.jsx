@@ -7,8 +7,10 @@ import { getDonates } from "../api/donate";
 import CategoryFilter from "../components/CategoryFilter";
 import { FaPencilAlt } from "react-icons/fa";
 import { initDonateData } from "../../func/donate_fn";
+import DonateDetail from "./DonateDetail";
 
 function Home(props) {
+  // 카테고리별 데이터 출력
   const [filter, setFilter] = useState({
     category: undefined,
   });
@@ -18,11 +20,9 @@ function Home(props) {
       [key]: value,
     });
 
+  // 반응형
   const [isGridView, setIsGridView] = useState(true);
 
-  const [localCategoryText, setLocalCategoryText] = useState("");
-
-  
   // 데이터 조회리스트
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["donates", filter.category],
@@ -33,31 +33,54 @@ function Home(props) {
     initialData: [],
   });
 
+  const [boardSts, setboardSts] = useState("list");
+
+  // boardSts 변환 버튼
+  const clickButton = (e) => {
+    let btnText = e.target.innerText;
+
+    switch (btnText) {
+      case "모금 제안":
+        setboardSts("write");
+        break;
+      case "리스트":
+        setboardSts("list");
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <>
-      <div className="mb-6 flex flex-col sm:flex-row items-center justify-between">
-        <CategoryFilter
-          category={filter.category}
-          onChange={(val) => handleFilter("category", val)}
-        />
-      </div>
-      {isLoading && <Loading />}
-      {error && <Error message={error.message} onRetry={refetch} />}
-      <div className="flex gap-5">
-        <h3 className="text-2xl font-extrabold mb-5">
-          진행중 모금함 {data.length}
-        </h3>
-        <div className="flex gap-1 items-center mb-4 cursor-pointer">
-          <FaPencilAlt className="" />
-          <h3 className="underline text-lg">모금 제안</h3>
+      {boardSts == "list" && (
+        <div>
+          <div className="mb-6 flex flex-col sm:flex-row items-center justify-between">
+            <CategoryFilter
+              category={filter.category}
+              onChange={(val) => handleFilter("category", val)}
+            />
+          </div>
+          {isLoading && <Loading />}
+          {error && <Error message={error.message} onRetry={refetch} />}
+          <div className="flex gap-5">
+            <h3 className="text-2xl font-extrabold mb-5">
+              진행중 모금함 {data.length}
+            </h3>
+            <div className="flex gap-1 items-center mb-4 cursor-pointer">
+              <FaPencilAlt className="" />
+              <h3 className="underline text-lg" onClick={clickButton}>
+                모금 제안
+              </h3>
+            </div>
+          </div>
+          {!isLoading && !error && (
+            <DonateList filteredData={data} isGridView={isGridView} />
+          )}
         </div>
-      </div>
-      {!isLoading && !error && (
-        <DonateList
-          filteredData={data}
-          isGridView={isGridView}
-        />
       )}
+      {boardSts == "write" && <div>asd</div>}
     </>
   );
 }

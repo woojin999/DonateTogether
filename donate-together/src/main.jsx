@@ -8,6 +8,7 @@ import Donate from "./pages/Donate.jsx";
 import Campaign from "./pages/Campaign.jsx";
 import MyDonate from "./pages/MyDonate.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import DonateDetail from "./pages/DonateDetail.jsx";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "donate",
         element: <Donate />,
+      },
+      {
+        path: "donates/:id",
+        element: <DonateDetail />,
       },
     ],
   },

@@ -1,7 +1,7 @@
 import orgDonateData from "../../data/db.json";
 
+// 도네이트 진행 리스트 데이터 가져오기
 export function getDonates(params) {
-
   // 만약 로컬스 "donate-data"가 null이면 생성
   if (localStorage.getItem("donate-data") === null) {
     localStorage.setItem("donate-data", JSON.stringify(orgDonateData));
@@ -32,3 +32,26 @@ export function getDonates(params) {
 
   return sortedDonates;
 }
+
+
+export async function getDonateById(id) {
+  // localStorage에서 donate-data를 가져옴
+  const donateData = JSON.parse(localStorage.getItem("donate-data"))?.donates;
+
+  if (!donateData) {
+    console.error("No donate data found in localStorage");
+    return null; // 데이터가 없으면 null 반환
+  }
+
+  // id에 맞는 데이터를 찾음
+  const donateItem = donateData.find(item => item.id === parseInt(id));
+
+  if (!donateItem) {
+    console.error(`Donate item with id ${id} not found.`);
+    return null; // 찾은 데이터가 없으면 null 반환
+  }
+
+  // 찾은 donateItem 반환
+  return donateItem; // data 속성이 필요 없으므로 바로 donateItem 반환
+}
+

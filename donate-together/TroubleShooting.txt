@@ -1,0 +1,7 @@
+DonateDetail에서  getDonateById 로 받아온 데이터를 바로 출력하게 할려했지만 오류
+
+데이터가 로드되기전에 donate 객체가 undefined 이였기때문
+
+donate의 초기값을 null로 설정하여 if (!donate)로 donate가 존재하지 않는 경우 로딩 메시지를 표시
+
+--------------------
