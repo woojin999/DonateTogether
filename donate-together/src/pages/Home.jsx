@@ -8,6 +8,8 @@ import CategoryFilter from "../components/CategoryFilter";
 import { FaPencilAlt } from "react-icons/fa";
 import { initDonateData } from "../../func/donate_fn";
 import DonateDetail from "./DonateDetail";
+import DonateAdd from "../components/DonateAdd";
+import { useData } from "../context/StsProvider";
 
 function Home(props) {
   // 카테고리별 데이터 출력
@@ -33,7 +35,9 @@ function Home(props) {
     initialData: [],
   });
 
-  const [boardSts, setboardSts] = useState("list");
+  // const [boardSts, setboardSts] = useState("list");
+
+  const {boardSts, setBoardSts} = useData();
 
   // boardSts 변환 버튼
   const clickButton = (e) => {
@@ -41,16 +45,18 @@ function Home(props) {
 
     switch (btnText) {
       case "모금 제안":
-        setboardSts("write");
+        setBoardSts("write");
         break;
       case "리스트":
-        setboardSts("list");
+        setBoardSts("list");
         break;
 
       default:
         break;
     }
   };
+
+  
 
   return (
     <>
@@ -80,7 +86,7 @@ function Home(props) {
           )}
         </div>
       )}
-      {boardSts == "write" && <div>asd</div>}
+      {boardSts == "write" && <DonateAdd/>}
     </>
   );
 }

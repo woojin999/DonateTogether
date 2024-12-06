@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { useState } from "react";
 import Button from "./components/Button";
+import { useData } from "./context/StsProvider";
 
 function Header() {
   const navItems = [
@@ -25,11 +26,21 @@ function Header() {
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const {boardSts, setBoardSts} = useData();
+  
+  const handleChangeSts = () => {
+    setBoardSts("list");
+  }
+
+  // console.log(sharedData);
+  
+
   return (
-    <header className="sticky top-0 bg-white px-4 z-30 border-b-2">
-      <div className="container mx-auto flex justify-between items-center h-20">
+    <header className="sticky top-0 bg-white px-4 z-30 border-b-2 ">
+      <div className="container mx-auto px-12 lg:px-24 flex justify-between items-center h-20">
         <div>
-          <Link to="/" className="text-2xl font-bold">
+          <Link to="/" className="text-2xl font-bold" onClick={handleChangeSts}>
             Donate Together
           </Link>
         </div>

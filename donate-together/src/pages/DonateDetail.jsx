@@ -38,6 +38,11 @@ function DonateDetail() {
       <div>
         <h2>{donate.title}</h2>
         <p>{new Intl.NumberFormat().format(donate.price)}원</p>
+        <div>
+          <p>모급함 기부 현황</p>
+          <p>총기부</p>
+          
+        </div>
       </div>
     </div>
   );
