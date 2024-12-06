@@ -1,4 +1,4 @@
-import orgDonateData from "../../data/db.json";
+import orgDonateData from "../../data/donate.json";
 
 // 도네이트 진행 리스트 데이터 가져오기
 export function getDonates(params) {
@@ -11,14 +11,12 @@ export function getDonates(params) {
   const donateData = JSON.parse(localStorage.getItem("donate-data"));
 
   // 로컬스토리지에 데이터가 없을 경우 처리
-  if (!donateData || !donateData.donates) {
+  if (!donateData) {
     return [];
   }
 
-  const donatesList = donateData.donates;
-
   // 필터링 및 정렬
-  const sortedDonates = donatesList.sort(
+  const sortedDonates = donateData.sort(
     (a, b) => new Date(b.lastModified) - new Date(a.lastModified)
   );
 
@@ -33,10 +31,9 @@ export function getDonates(params) {
   return sortedDonates;
 }
 
-
 export async function getDonateById(id) {
   // localStorage에서 donate-data를 가져옴
-  const donateData = JSON.parse(localStorage.getItem("donate-data"))?.donates;
+  const donateData = JSON.parse(localStorage.getItem("donate-data"));
 
   if (!donateData) {
     console.error("No donate data found in localStorage");
@@ -44,7 +41,7 @@ export async function getDonateById(id) {
   }
 
   // id에 맞는 데이터를 찾음
-  const donateItem = donateData.find(item => item.id === parseInt(id));
+  const donateItem = donateData.find((item) => item.id === parseInt(id));
 
   if (!donateItem) {
     console.error(`Donate item with id ${id} not found.`);
@@ -54,4 +51,3 @@ export async function getDonateById(id) {
   // 찾은 donateItem 반환
   return donateItem; // data 속성이 필요 없으므로 바로 donateItem 반환
 }
-

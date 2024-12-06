@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import DonateList from "../components/DonateList";
 import Loading from "../components/Loading";
@@ -6,12 +6,12 @@ import Error from "../components/Error";
 import { getDonates } from "../api/donate";
 import CategoryFilter from "../components/CategoryFilter";
 import { FaPencilAlt } from "react-icons/fa";
-import { initDonateData } from "../../func/donate_fn";
-import DonateDetail from "./DonateDetail";
 import DonateAdd from "../components/DonateAdd";
 import { useData } from "../context/StsProvider";
 
 function Home(props) {
+  // 로컬스토리지 변경 여부
+  const [dataUpdated, setDataUpdated] = useState(false);
   // 카테고리별 데이터 출력
   const [filter, setFilter] = useState({
     category: undefined,
@@ -27,7 +27,7 @@ function Home(props) {
 
   // 데이터 조회리스트
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ["donates", filter.category],
+    queryKey: ["donates", filter.category, dataUpdated],
     queryFn: () =>
       getDonates({
         category: filter.category,
@@ -35,9 +35,20 @@ function Home(props) {
     initialData: [],
   });
 
-  // const [boardSts, setboardSts] = useState("list");
+  useEffect(() => {
+    // localStorage의 데이터가 바뀌면 refetch 호출
+    const handleStorageChange = () => {
+      setDataUpdated((prev) => !prev); // dataUpdated 상태 토글
+    };
 
-  const {boardSts, setBoardSts} = useData();
+    // 로컬스토리지의 변화를 감지
+    window.addEventListener("storage", handleStorageChange);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  const { boardSts, setBoardSts } = useData();
 
   // boardSts 변환 버튼
   const clickButton = (e) => {
@@ -50,13 +61,13 @@ function Home(props) {
       case "리스트":
         setBoardSts("list");
         break;
-
+      case "등록하기":
+        setBoardSts("list");
+        break;
       default:
         break;
     }
   };
-
-  
 
   return (
     <>
@@ -86,7 +97,9 @@ function Home(props) {
           )}
         </div>
       )}
-      {boardSts == "write" && <DonateAdd/>}
+      {boardSts == "write" && (
+        <DonateAdd clickButton={clickButton} setDataUpdated={setDataUpdated} />
+      )}
     </>
   );
 }

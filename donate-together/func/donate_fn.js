@@ -1,5 +1,4 @@
-import orgDonateData from "../data/db.json"
-
+import orgDonateData from "../data/donate.json"
 
 // 로컬스 초기화
 const clearDonateData = () => {
