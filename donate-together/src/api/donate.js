@@ -56,3 +56,25 @@ export async function getDonateById(id) {
   // 찾은 donateItem 반환
   return donateItem; // data 속성이 필요 없으므로 바로 donateItem 반환
 }
+
+export async function getDonationById(id) {
+  // localStorage에서 donate-data를 가져옴
+  const donationData = JSON.parse(localStorage.getItem("donation-data"));
+
+  if (!donationData) {
+    console.error("No donation data found in localStorage");
+    return null; // 데이터가 없으면 null 반환
+  }
+
+  // id에 맞는 데이터를 찾음
+  const donationItem = donationData
+    .filter((item) => item.donateIdx === parseInt(id));
+
+  if (!donationItem) {
+    console.error(`Donation item with id ${id} not found.`);
+    return null; // 찾은 데이터가 없으면 null 반환
+  }
+
+  // 찾은 donationItem 반환
+  return donationItem; // data 속성이 필요 없으므로 바로 donationItem 반환
+}

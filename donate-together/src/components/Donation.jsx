@@ -37,12 +37,11 @@ function Donation({ setIsModalVisible, donateIdx }) {
 
     let data = {
       id: uuidv4(),
-      donateIdx: donateIdx,
+      donateIdx: parseInt(donateIdx),
       price: donationAmount,
       comment: comment,
       donationDate: date,
     };
-    console.log(data);
 
     let locals = JSON.parse(localStorage.getItem("donation-data"));
     locals.push(data);
@@ -59,8 +58,9 @@ function Donation({ setIsModalVisible, donateIdx }) {
     });
     localStorage.setItem("donate-data", JSON.stringify(donateData));
 
-    alert("기부완료! 감사합니다.");
     setIsModalVisible(false);
+
+    alert("기부완료! 감사합니다.");
   };
 
   return (

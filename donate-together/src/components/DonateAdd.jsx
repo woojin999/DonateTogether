@@ -48,7 +48,8 @@ function DonateAdd({ clickButton, setDataUpdated }) {
       topic: topic,
       category: category,
       content: content,
-      price: "0",
+      price: 0,
+      donateCnt: 0,
       image: "sample1.jpg",
       lastModified: date,
     };
