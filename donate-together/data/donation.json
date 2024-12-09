@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "donateIdx": 1,
+    "price": "1000",
+    "comment": "응원합니다!",
+    "donationDate": "2024-12-09"
+  },
+  {
+    "id": 2,
+    "donateIdx": 1,
+    "price": "1000",
+    "comment": "응원합니다!",
+    "donationDate": "2024-12-09"
+  },
+  {
+    "id": 3,
+    "donateIdx": 1,
+    "price": "1000",
+    "comment": "응원합니다!",
+    "donationDate": "2024-12-09"
+  }
+]

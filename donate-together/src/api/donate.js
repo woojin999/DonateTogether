@@ -1,10 +1,15 @@
 import orgDonateData from "../../data/donate.json";
+import donationData from "../../data/donation.json";
 
 // 도네이트 진행 리스트 데이터 가져오기
 export function getDonates(params) {
   // 만약 로컬스 "donate-data"가 null이면 생성
   if (localStorage.getItem("donate-data") === null) {
     localStorage.setItem("donate-data", JSON.stringify(orgDonateData));
+  }
+  // 기부중인 데이터
+  if (localStorage.getItem("donation-data") === null) {
+    localStorage.setItem("donation-data", JSON.stringify(donationData));
   }
 
   // 로컬스토리지에서 데이터를 가져옴
