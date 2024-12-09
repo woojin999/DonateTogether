@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useData } from "../context/StsProvider";
-import $ from "jquery";
+import { FaImage } from "react-icons/fa";
 
 function DonateAdd({ clickButton, setDataUpdated }) {
   const { boardSts, setBoardSts } = useData();
@@ -9,6 +9,11 @@ function DonateAdd({ clickButton, setDataUpdated }) {
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
+
+  const uploadFile = useRef(null);
+
+  // 파일저장변수 업데이트 함수
+  const updateFileInfo = (x) => (uploadFile.current = x);
 
   const baseData = JSON.parse(localStorage.getItem("donate-data"));
 
@@ -44,12 +49,9 @@ function DonateAdd({ clickButton, setDataUpdated }) {
       category: category,
       content: content,
       price: "0",
-      image: "dummy2.png",
+      image: "sample1.jpg",
       lastModified: date,
     };
-
-    // let addData = baseData.push(data);
-    // localStorage.setItem("donate-data", JSON.stringify(addData));
 
     let locals = JSON.parse(localStorage.getItem("donate-data"));
     locals.push(data);
@@ -58,6 +60,7 @@ function DonateAdd({ clickButton, setDataUpdated }) {
     // 데이터가 업데이트되었음을 알려서 useQuery가 데이터를 다시 가져오도록 함
     setDataUpdated((prev) => !prev); // dataUpdated 상태 토글
 
+    // 등록후 리스트로 이동
     setBoardSts("list");
   };
 
@@ -166,7 +169,12 @@ function DonateAdd({ clickButton, setDataUpdated }) {
             <td className="px-4 py-2 text-sm font-bold text-gray-600">
               사진 첨부
             </td>
-            <td className="px-4 py-2"></td>
+            <td className="px-4 py-2">
+              <div className="flex flex-col items-center p-5 cursor-not-allowed h-40">
+                <FaImage className="text-2xl mb-2 size-24" />
+                <p>샘플 이미지 자동 등록.</p>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>

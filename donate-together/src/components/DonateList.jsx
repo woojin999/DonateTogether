@@ -11,6 +11,7 @@ function donateList({ filteredData, isGridView}) {
       {filteredData.map((item) => (
         <DonateItem
           key={item.id}
+          topic={item.topic}
           category={item.category}
           id={item.id}
           lastModified={item.lastModified}

@@ -98,7 +98,7 @@ function Home(props) {
         </div>
       )}
       {boardSts == "write" && (
-        <DonateAdd clickButton={clickButton} setDataUpdated={setDataUpdated} />
+        <DonateAdd clickButton={clickButton} setDataUpdated={setDataUpdated}/>
       )}
     </>
   );
