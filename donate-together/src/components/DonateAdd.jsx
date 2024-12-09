@@ -130,7 +130,6 @@ function DonateAdd({ clickButton, setDataUpdated }) {
                 <option value="" disabled>
                   선택해주세요
                 </option>
-                <option value="동물">동물</option>
                 <option value="청소년">청소년</option>
                 <option value="환경">환경</option>
                 <option value="장애인">장애인</option>
