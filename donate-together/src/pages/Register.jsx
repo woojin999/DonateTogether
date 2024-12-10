@@ -1,8 +1,11 @@
-import React, { useState } from "react";
-import DaumPostcode from "react-daum-postcode"
+import React, { useEffect, useState } from "react";
+import DaumPostcode from "react-daum-postcode";
+import { initmemberData } from "../../func/donate_fn";
+import { v4 as uuidv4 } from "uuid";
 
 function Register() {
-  const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState("");
+  const [userIdError,setUserIdError] = useState(false);
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -10,24 +13,66 @@ function Register() {
   const [extraAddress, setExtraAddress] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isPostcodeVisible, setIsPostcodeVisible] = useState(false);
+  const [date, setDate] = useState("");
+  
+  useEffect(() => {
+    const currentDate = new Date().toISOString().split("T")[0];
+    setDate(currentDate);
+  }, []);
+  
+  let memberData = JSON.parse(localStorage.getItem("member-data"));
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!username || !password || !name || !email || !address) {
-      setErrorMessage("모든 항목을 입력해 주세요.");
+
+    const isUser = memberData.find((member) => member.userid === userId);
+
+    if (isUser) {
+      setUserIdError(true);  // 아이디 중복 에러
+      setErrorMessage("이미 존재하는 아이디입니다.");
+      return;
+    } else {
+      setUserIdError(false); // 아이디 중복 아님
+    }
+
+    if (!userId) {
+      setErrorMessage("아이디를 입력해 주세요.");
+      return;
+    } else if (!password) {
+      setErrorMessage("비밀번호를 입력해 주세요.");
+      return;
+    } else if (!name) {
+      setErrorMessage("이름을 입력해 주세요.");
+      return;
+    } else if (!email) {
+      setErrorMessage("이메일을 입력해 주세요.");
+      return;
+    } else if (!address) {
+      setErrorMessage("주소를 입력해 주세요.");
       return;
     }
 
     // 회원가입 처리 로직 추가
     setErrorMessage("");
-    console.log("회원가입 시도:", {
-      username,
-      password,
-      name,
-      email,
-      address,
-      extraAddress,
-    });
+
+    initmemberData();
+
+
+    let newData = {
+      uuid: uuidv4(),
+      userid: userId,
+      password: password,
+      username: name,
+      email: email,
+      date: date,
+      address: address + " " + extraAddress,
+    };
+
+    memberData.push(newData);
+
+    localStorage.setItem("member-data", JSON.stringify(memberData));
+
+    console.log("회원가입 시도:", newData);
   };
 
   // 주소가 선택되었을 때 처리하는 함수
@@ -61,15 +106,15 @@ function Register() {
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="username"
+              htmlFor="userId"
             >
               아이디
             </label>
             <input
               type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              id="userId"
+              value={userId}
+              onChange={(e) => setUserId(e.target.value)}
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
               placeholder="아이디를 입력하세요"
             />
@@ -154,15 +199,15 @@ function Register() {
                 검색
               </button>
             </div>
-            {extraAddress && (
-              <input
-                type="text"
-                value={extraAddress}
-                onChange={(e) => setExtraAddress(e.target.value)}
-                className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
-                placeholder="상세 주소를 입력하세요"
-              />
-            )}
+            <input
+              type="text"
+              value={extraAddress}
+              onChange={(e) => setExtraAddress(e.target.value)}
+              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+              placeholder="상세 주소를 입력하세요"
+            />
+            {/* {extraAddress && (
+            )} */}
           </div>
 
           {/* Daum 주소 팝업 */}

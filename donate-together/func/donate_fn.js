@@ -12,26 +12,27 @@ const initDonateData = () => {
   }
 }; ///////////// initData /////////////////
 
-const memberData = () => {
+const initmemberData = () => {
   if (localStorage.getItem("member-data") === null) {
     localStorage.setItem(
       "member-data",
       `
         [
             {
-                "idx": "1",
+                "uuid": "admin",
                 "userid":"admin",
                 "password":"1111",
                 "username":"Admin",
-                "email":"admin@donate.com"
+                "email":"admin@donate.com",
+                "address":"성남시 수정구",
                 "date":"2024-12-11"
             },
             {
-                "idx": "2",
+                "uuid": "tester",
                 "userid":"tester",
                 "password":"1111",
                 "username":"tester",
-                "email":"tester@donate.com"
+                "email":"tester@donate.com",
                 "date":"2024-12-11"
             }
         ]
@@ -40,7 +41,7 @@ const memberData = () => {
   }
 }
 
-export { clearDonateData, initDonateData ,memberData };
+export { clearDonateData, initDonateData ,initmemberData };
 
 
 
