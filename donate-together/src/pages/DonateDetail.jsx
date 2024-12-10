@@ -61,25 +61,40 @@ function DonateDetail() {
           />
           <p>{donate.content}</p>
         </div>
-
         <div>
           <p className="mb-5 font-bold text-2xl">기부내역</p>
-          <ul className="space-y-4">
-            {donation.slice(0, 30).reverse().map((item) => (
-              <li key={item.id} className="border-b border-gray-200 pb-4">
-                <div className="flex justify-between items-center mb-2">
-                  <p className="text-gray-600">tester</p>
-                  <p className="text-lg font-bold text-red-500">
-                    {item.price}원 기부
-                  </p>
-                </div>
-                <div className="flex justify-between items-center">
-                  <p className="font-semibold text-gray-800">{item.comment}</p>
-                  <p className="text-gray-600 text-sm">{item.donationDate}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          {donation.length == 0 && (
+            <div className="pt-5">
+              <p className="mb-5 font-bold text-xl text-center">
+                기부 내역이 없습니다
+              </p>
+            </div>
+          )}
+          {donation.length > 0 && (
+            <ul className="space-y-4">
+              {donation
+                .slice(0, 30)
+                .reverse()
+                .map((item) => (
+                  <li key={item.id} className="border-b border-gray-200 pb-4">
+                    <div className="flex justify-between items-center mb-2">
+                      <p className="text-gray-600">tester</p>
+                      <p className="text-lg font-bold text-red-500">
+                        {item.price}원 기부
+                      </p>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="font-semibold text-gray-800">
+                        {item.comment}
+                      </p>
+                      <p className="text-gray-600 text-sm">
+                        {item.donationDate}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+            </ul>
+          )}
         </div>
       </div>
       <div className="sticky top-[90px] self-start">
