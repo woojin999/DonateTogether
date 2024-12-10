@@ -55,17 +55,21 @@ function Header() {
             </NavLink>
           ))}
         </nav>
-        <div className="flex gap-3 w-48 justify-end">
-          <button className="">
-            <FaSearch className="size-5 hover:text-gray-800 " />
-          </button>
-          <button>
+        <ul className="flex gap-3 w-48 justify-end">
+          <li className="cursor-pointer">
+            <Link>
+            <FaSearch className="size-6 hover:text-gray-800 " />
+            </Link>
+          </li>
+          <li className="cursor-pointer">
+            <Link to="/login">
             <FaUserCircle className="size-6 hover:text-gray-800 " />
-          </button>
-          <button className="" onClick={toggleMenu}>
+            </Link>
+          </li>
+          <li className="cursor-pointer" onClick={toggleMenu}>
             <FaBars className="size-6 hover:text-gray-800 " />
-          </button>
-        </div>
+          </li>
+        </ul>
       </div>
       {/* Mobile Menu */}
       <aside

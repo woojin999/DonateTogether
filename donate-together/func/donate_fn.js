@@ -12,7 +12,35 @@ const initDonateData = () => {
   }
 }; ///////////// initData /////////////////
 
-export { clearDonateData, initDonateData };
+const memberData = () => {
+  if (localStorage.getItem("member-data") === null) {
+    localStorage.setItem(
+      "member-data",
+      `
+        [
+            {
+                "idx": "1",
+                "userid":"admin",
+                "password":"1111",
+                "username":"Admin",
+                "email":"admin@donate.com"
+                "date":"2024-12-11"
+            },
+            {
+                "idx": "2",
+                "userid":"tester",
+                "password":"1111",
+                "username":"tester",
+                "email":"tester@donate.com"
+                "date":"2024-12-11"
+            }
+        ]
+    `
+    )
+  }
+}
+
+export { clearDonateData, initDonateData ,memberData };
 
 
 
