@@ -33,7 +33,7 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const { boardSts, setBoardSts } = useData();
-  const { loginSts, loginName, setLoginName,setLoginEmail } = useLoginData();
+  const { loginSts, loginName, setLoginName, setLoginEmail } = useLoginData();
 
   // 로그인시 회원 이름 가져오기 위해 렌더링
   useEffect(() => {
@@ -86,11 +86,6 @@ function Header() {
               <FaSearch className="size-5 hover:text-gray-800 " />
             </Link>
           </li>
-          {/* <li className="cursor-pointer">
-            <Link to="/login">
-              <FaUserCircle className="size-6 hover:text-gray-800 " />
-            </Link>
-          </li> */}
           <li className="cursor-pointer pt-1" onClick={toggleMenu}>
             <FaBars className="size-5 hover:text-gray-800 " />
           </li>
@@ -98,8 +93,8 @@ function Header() {
       </div>
       {/* Mobile Menu */}
       <aside
-        className={`fixed top-0 left-0 w-64 h-full bg-gray-100 z-50 ${
-          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed top-0 right-0 w-80 h-full bg-teal-50 z-50 ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
         } transform transition-transform duration-300 ease-in-out`}
       >
         <div className="flex justify-end p-4">
@@ -111,7 +106,7 @@ function Header() {
             <FaTimes className="h-6 w-6" />
           </button>
         </div>
-        <nav className="flex flex-col space-y-4 p-4">
+        <nav className="flex flex-col space-y-4 p-4 pl-6">
           {navItems.map((item) => (
             <NavLink
               key={item.id}
