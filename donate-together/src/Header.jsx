@@ -9,9 +9,10 @@ import {
   FaPersonBooth,
   FaUserCircle,
 } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import { useData } from "./context/StsProvider";
+import { useLoginData } from "./context/userProvider";
 
 function Header() {
   const navItems = [
@@ -22,20 +23,30 @@ function Header() {
       icon: <FaInfoCircle />,
       to: "/campaign",
     },
-    { id: "mydonate", label: "나의기부", icon: <FaInfoCircle />, to: "/mydonate" },
+    {
+      id: "mydonate",
+      label: "나의기부",
+      icon: <FaInfoCircle />,
+      to: "/mydonate",
+    },
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const { boardSts, setBoardSts } = useData();
+  const { loginSts, loginName, setLoginName,setLoginEmail } = useLoginData();
 
-  const {boardSts, setBoardSts} = useData();
-  
+  // 로그인시 회원 이름 가져오기 위해 렌더링
+  useEffect(() => {
+    if (sessionStorage.getItem("loginInfo")) {
+      let data = JSON.parse(sessionStorage.getItem("loginInfo"));
+      setLoginName(data.username);
+      setLoginEmail(data.email);
+    }
+  }, [loginSts]);
+
   const handleChangeSts = () => {
     setBoardSts("list");
-  }
-
-  // console.log(sharedData);
-  
-
+  };
   return (
     <header className="sticky top-0 bg-white px-4 z-30 border-b-2 ">
       <div className="container mx-auto px-12 lg:px-24 flex justify-between items-center h-20">
@@ -56,18 +67,32 @@ function Header() {
           ))}
         </nav>
         <ul className="flex gap-3 w-48 justify-end">
-          <li className="cursor-pointer">
+          {!loginSts && (
+            <li className="cursor-pointer">
+              <Link to="/login">
+                <p className="underline font-bold text-lg">로그인</p>
+              </Link>
+            </li>
+          )}
+          {loginSts && (
+            <li className="cursor-pointer">
+              <Link to="/mypage">
+                <p className="underline font-bold text-lg">{loginName}님</p>
+              </Link>
+            </li>
+          )}
+          <li className="cursor-pointer pt-1">
             <Link>
-            <FaSearch className="size-6 hover:text-gray-800 " />
+              <FaSearch className="size-5 hover:text-gray-800 " />
             </Link>
           </li>
-          <li className="cursor-pointer">
+          {/* <li className="cursor-pointer">
             <Link to="/login">
-            <FaUserCircle className="size-6 hover:text-gray-800 " />
+              <FaUserCircle className="size-6 hover:text-gray-800 " />
             </Link>
-          </li>
-          <li className="cursor-pointer" onClick={toggleMenu}>
-            <FaBars className="size-6 hover:text-gray-800 " />
+          </li> */}
+          <li className="cursor-pointer pt-1" onClick={toggleMenu}>
+            <FaBars className="size-5 hover:text-gray-800 " />
           </li>
         </ul>
       </div>
@@ -88,7 +113,11 @@ function Header() {
         </div>
         <nav className="flex flex-col space-y-4 p-4">
           {navItems.map((item) => (
-            <NavLink key={item.id} to={item.to} className="hover:text-gray-300 font-bold">
+            <NavLink
+              key={item.id}
+              to={item.to}
+              className="hover:text-gray-300 font-bold"
+            >
               {item.label}
             </NavLink>
           ))}

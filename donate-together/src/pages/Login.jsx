@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { initmemberData } from "../../func/donate_fn";
+import { useLoginData } from "../context/userProvider";
 
 function Login() {
-  const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
+  const [userId, setUserId] = useState("admin");
+  const [password, setPassword] = useState("1111");
   const [errorMessage, setErrorMessage] = useState("");
+  const { loginSts, setLoginSts, goPage } = useLoginData();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,15 +15,37 @@ function Login() {
       setErrorMessage("아이디와 비밀번호를 입력해 주세요.");
       return;
     }
-    // 로그인 처리 로직 추가
+
+    initmemberData();
+
+    let memberData = JSON.parse(localStorage.getItem("member-data"));
+
+    let result = memberData.find((v) => {
+      if (v.userid == userId) return true;
+    }); // 아이디 존재여부 찾기
+
+    if (!result) {
+      setErrorMessage("아이디가 존재하지 않습니다");
+      return;
+    } else {
+      if (result.password == password) {
+        sessionStorage.setItem("loginInfo", JSON.stringify(result)); // 로그인 정보 저장
+        setLoginSts(sessionStorage.getItem("loginInfo")); // 로그인 상태 업데이트
+      } else {
+        setErrorMessage("비밀번호가 틀렸습니다.");
+        return;
+      }
+    }
     setErrorMessage("");
-    console.log("로그인 시도:", { userId, password });
+    goPage("/");
   };
 
   return (
     <div className="min-h-[750px] flex justify-center items-center">
       <div className="bg-gray-100 p-8 rounded-lg shadow-lg w-full sm:w-[700px]">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">로그인</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+          로그인
+        </h2>
 
         {/* 오류 메시지 */}
         {errorMessage && (
@@ -31,7 +56,10 @@ function Login() {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="text">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="text"
+            >
               아이디
             </label>
             <input
@@ -45,7 +73,10 @@ function Login() {
           </div>
 
           <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="password">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="password"
+            >
               비밀번호
             </label>
             <input
@@ -58,16 +89,27 @@ function Login() {
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full py-3 bg-gray-400 text-white font-semibold rounded-lg hover:bg-gray-700 transition duration-300"
-          >
-            로그인
-          </button>
+          <div className="flex gap-5">
+            <Link
+              to="/"
+              className="w-full py-3 bg-gray-400 text-center text-white font-semibold rounded-lg hover:bg-gray-700 transition duration-300"
+            >
+              홈으로
+            </Link>
+            <button
+              type="submit"
+              className="w-full py-3 bg-gray-400 text-white font-semibold rounded-lg hover:bg-gray-700 transition duration-300"
+            >
+              로그인
+            </button>
+          </div>
 
           <div className="text-center mt-4 text-gray-600 text-sm">
             <span>계정이 없으신가요?</span>
-            <Link to="/join" className="text-gray-800 font-semibold hover:underline">
+            <Link
+              to="/join"
+              className="text-gray-800 font-semibold hover:underline"
+            >
               회원가입
             </Link>
           </div>

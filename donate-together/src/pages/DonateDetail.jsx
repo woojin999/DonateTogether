@@ -3,6 +3,7 @@ import { getDonateById, getDonationById } from "../api/donate";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import Donation from "../components/Donation";
+import { useLoginData } from "../context/userProvider";
 
 function DonateDetail() {
   const donateData = JSON.parse(localStorage.getItem("donate-data"));
@@ -10,6 +11,7 @@ function DonateDetail() {
   const [donate, setDonate] = useState(null); // 초기값을 null로 설정
   const [donation, setDonation] = useState(null); // 초기값을 null로 설정
   const [isModalVisible, setIsModalVisible] = useState(false); // 모달의 표시 여부
+  const { loginSts,goPage } = useLoginData();
 
   useEffect(() => {
     const fetchDonate = async () => {
@@ -48,7 +50,11 @@ function DonateDetail() {
 
   // 모달 열기
   const openModal = () => {
-    setIsModalVisible(true);
+    if (loginSts) {
+      setIsModalVisible(true);
+    } else{
+      goPage("/login")
+    }
   };
   return (
     <div className="grid gap-12 grid-cols-1 md:grid-cols-[7fr_3fr]">
@@ -78,7 +84,7 @@ function DonateDetail() {
                 .map((item) => (
                   <li key={item.id} className="border-b border-gray-200 pb-4">
                     <div className="flex justify-between items-center mb-2">
-                      <p className="text-gray-600">tester</p>
+                      <p className="text-gray-600">{item.contributor}님</p>
                       <p className="text-lg font-bold text-red-500">
                         {item.price}원 기부
                       </p>
@@ -115,9 +121,10 @@ function DonateDetail() {
             <span className="font-bold text-black">{donate.donateCnt}</span>번
             달성!
           </p>
-          <p className="border-t-2 border-gray-300 mb-4 pb-2 text-xs pt-4">
+          <p className="border-t-2 border-gray-300  pb-2 text-xs pt-4">
             *기부금은 100% 단체에 전달됩니다.
           </p>
+          <p className="text-xs mb-4">후원글 작성자 : {donate.writer}</p>
 
           {/* 기부하기 버튼 */}
           <button

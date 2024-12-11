@@ -11,6 +11,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import DonateDetail from "./pages/DonateDetail.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import MyPage from "./pages/MyPage.jsx";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login/>
+      },
+      {
+        path: "mypage",
+        element: <MyPage/>
       },
       {
         path: "campaign",

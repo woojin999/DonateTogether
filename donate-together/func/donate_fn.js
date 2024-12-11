@@ -22,17 +22,18 @@ const initmemberData = () => {
                 "uuid": "admin",
                 "userid":"admin",
                 "password":"1111",
-                "username":"Admin",
+                "username":"어드민",
                 "email":"admin@donate.com",
                 "address":"성남시 수정구",
                 "date":"2024-12-11"
             },
             {
-                "uuid": "tester",
-                "userid":"tester",
+                "uuid": "woojin",
+                "userid":"woojin",
                 "password":"1111",
-                "username":"tester",
-                "email":"tester@donate.com",
+                "username":"이우진",
+                "email":"woojin@donate.com",
+                "address":"성남시 수정구",
                 "date":"2024-12-11"
             }
         ]

@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "writer":"이우진",
     "title": "2025년, 저소득 청소년의 신학기를 응원해 주세요!",
     "topic": "청소년 교육 지원",
     "category": "청소년",
@@ -12,6 +13,7 @@
   },
   {
     "id": 2,
+    "writer":"이우진",
     "title": "환경 데이터",
     "topic": "test",
     "category": "환경",
@@ -23,6 +25,7 @@
   },
   {
     "id": 3,
+    "writer":"이우진",
     "title": "장애인 데이터",
     "topic": "test",
     "category": "장애인",
@@ -34,6 +37,7 @@
   },
   {
     "id": 4,
+    "writer":"이우진",
     "title": "사회 데이터",
     "topic": "test",
     "category": "사회",
@@ -45,6 +49,7 @@
   },
   {
     "id": 5,
+    "writer":"이우진",
     "title": "어르신 데이터",
     "topic": "test",
     "category": "어르신",
@@ -56,6 +61,7 @@
   },
   {
     "id": 6,
+    "writer":"이우진",
     "title": "동물 데이터",
     "topic": "test",
     "category": "동물",

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useLoginData } from "../context/userProvider";
 
 function Donation({ setIsModalVisible, donateIdx }) {
   const [donationAmount, setDonationAmount] = useState(0); // 기부 금액 상태
   const [comment, setComment] = useState("");
   const [date, setDate] = useState("");
+  const {loginName} = useLoginData();
 
   useEffect(() => {
     const currentDate = new Date().toISOString().split("T")[0];
@@ -39,6 +41,7 @@ function Donation({ setIsModalVisible, donateIdx }) {
       id: uuidv4(),
       donateIdx: parseInt(donateIdx),
       price: donationAmount,
+      contributor:loginName,
       comment: comment,
       donationDate: date,
     };

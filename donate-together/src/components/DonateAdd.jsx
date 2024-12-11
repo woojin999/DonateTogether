@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useData } from "../context/StsProvider";
 import { FaImage } from "react-icons/fa";
+import { useLoginData } from "../context/userProvider";
 
 function DonateAdd({ clickButton, setDataUpdated }) {
-  const { boardSts, setBoardSts } = useData();
   const [title, setTitle] = useState("");
   const [topic, setTopic] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
+  const { boardSts, setBoardSts } = useData();
+  const { loginName, loginEmail } = useLoginData();
 
   const uploadFile = useRef(null);
 
@@ -44,6 +46,7 @@ function DonateAdd({ clickButton, setDataUpdated }) {
 
     let data = {
       id: newId,
+      writer:loginName,
       title: title,
       topic: topic,
       category: category,
@@ -77,7 +80,7 @@ function DonateAdd({ clickButton, setDataUpdated }) {
             <td className="px-4 py-2">
               <input
                 type="text"
-                defaultValue="tester"
+                value={loginName}
                 readOnly
                 className="w-full px-3 py-2 text-gray-500 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-not-allowed"
               />
@@ -90,7 +93,7 @@ function DonateAdd({ clickButton, setDataUpdated }) {
             <td className="px-4 py-2">
               <input
                 type="text"
-                defaultValue="tester"
+                value={loginEmail}
                 readOnly
                 className="w-full px-3 py-2 text-gray-500 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-not-allowed"
               />

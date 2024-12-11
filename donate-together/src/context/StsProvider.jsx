@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from "react";
+import { UserProvider } from "./userProvider";
 
 // Context 생성
 const StsContext = createContext();
@@ -8,9 +9,11 @@ export const StsProvider = ({ children }) => {
   const [boardSts, setBoardSts] = useState("list");
 
   return (
-    <StsContext.Provider value={{ boardSts, setBoardSts }}>
-      {children}
-    </StsContext.Provider>
+    <UserProvider>
+      <StsContext.Provider value={{ boardSts, setBoardSts }}>
+        {children}
+      </StsContext.Provider>
+    </UserProvider>
   );
 };
 

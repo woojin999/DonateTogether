@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { initmemberData } from "../../func/donate_fn";
 import { v4 as uuidv4 } from "uuid";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [userId, setUserId] = useState("");
-  const [userIdError,setUserIdError] = useState(false);
+  const [userIdError, setUserIdError] = useState(false);
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -14,27 +15,29 @@ function Register() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isPostcodeVisible, setIsPostcodeVisible] = useState(false);
   const [date, setDate] = useState("");
-  
+
+  // 오늘 날짜
   useEffect(() => {
     const currentDate = new Date().toISOString().split("T")[0];
     setDate(currentDate);
   }, []);
-  
+
+  initmemberData();
   let memberData = JSON.parse(localStorage.getItem("member-data"));
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    // 아이디 중복검사
     const isUser = memberData.find((member) => member.userid === userId);
-
     if (isUser) {
-      setUserIdError(true);  // 아이디 중복 에러
+      setUserIdError(true); // 아이디 중복 에러
       setErrorMessage("이미 존재하는 아이디입니다.");
       return;
     } else {
       setUserIdError(false); // 아이디 중복 아님
     }
 
+    // 빈값 검사
     if (!userId) {
       setErrorMessage("아이디를 입력해 주세요.");
       return;
@@ -52,12 +55,9 @@ function Register() {
       return;
     }
 
-    // 회원가입 처리 로직 추가
     setErrorMessage("");
 
-    initmemberData();
-
-
+    // 회원 정보 데이터
     let newData = {
       uuid: uuidv4(),
       userid: userId,
@@ -69,10 +69,7 @@ function Register() {
     };
 
     memberData.push(newData);
-
     localStorage.setItem("member-data", JSON.stringify(memberData));
-
-    console.log("회원가입 시도:", newData);
   };
 
   // 주소가 선택되었을 때 처리하는 함수
@@ -206,8 +203,6 @@ function Register() {
               className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
               placeholder="상세 주소를 입력하세요"
             />
-            {/* {extraAddress && (
-            )} */}
           </div>
 
           {/* Daum 주소 팝업 */}
@@ -217,13 +212,20 @@ function Register() {
               autoClose={false} // 팝업 창 닫히지 않게 설정
             />
           )}
-
-          <button
-            type="submit"
-            className="w-full py-3 bg-gray-400 text-white font-semibold rounded-lg hover:bg-gray-700 transition duration-300"
-          >
-            회원가입
-          </button>
+          <div className="flex gap-5">
+            <Link
+              to="/login"
+              className="w-full py-3 bg-gray-400 text-center text-white font-semibold rounded-lg hover:bg-gray-700 transition duration-300"
+            >
+              돌아가기
+            </Link>
+            <button
+              type="submit"
+              className="w-full py-3 bg-gray-400 text-white font-semibold rounded-lg hover:bg-gray-700 transition duration-300"
+            >
+              회원가입
+            </button>
+          </div>
         </form>
       </div>
     </div>

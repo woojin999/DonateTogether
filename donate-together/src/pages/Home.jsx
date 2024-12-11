@@ -8,22 +8,23 @@ import CategoryFilter from "../components/CategoryFilter";
 import { FaPencilAlt } from "react-icons/fa";
 import DonateAdd from "../components/DonateAdd";
 import { useData } from "../context/StsProvider";
+import { useLoginData } from "../context/userProvider";
 
 function Home(props) {
-  // 로컬스토리지 변경 여부
-  const [dataUpdated, setDataUpdated] = useState(false);
-  // 카테고리별 데이터 출력
+  const [dataUpdated, setDataUpdated] = useState(false); // 로컬스토리지 변경 여부
+  const [isGridView, setIsGridView] = useState(true); // 반응형 변수
+  const { boardSts, setBoardSts } = useData(); // 게시글 상태변수
+  const { loginSts, goPage } = useLoginData(); // 로그인 상태변수
   const [filter, setFilter] = useState({
     category: undefined,
-  });
+  }); // 카테고리별 데이터 출력
+
+  // 카테고리 필터
   const handleFilter = (key, value) =>
     setFilter({
       ...filter,
       [key]: value,
     });
-
-  // 반응형
-  const [isGridView, setIsGridView] = useState(true);
 
   // 데이터 조회리스트
   const { data, isLoading, error, refetch } = useQuery({
@@ -48,15 +49,17 @@ function Home(props) {
     };
   }, []);
 
-  const { boardSts, setBoardSts } = useData();
-
   // boardSts 변환 버튼
   const clickButton = (e) => {
     let btnText = e.target.innerText;
 
     switch (btnText) {
       case "모금 제안":
-        setBoardSts("write");
+        if (loginSts) {
+          setBoardSts("write");
+        } else {
+          goPage("/login");
+        }
         break;
       case "리스트":
         setBoardSts("list");
@@ -98,7 +101,7 @@ function Home(props) {
         </div>
       )}
       {boardSts == "write" && (
-        <DonateAdd clickButton={clickButton} setDataUpdated={setDataUpdated}/>
+        <DonateAdd clickButton={clickButton} setDataUpdated={setDataUpdated} />
       )}
     </>
   );
