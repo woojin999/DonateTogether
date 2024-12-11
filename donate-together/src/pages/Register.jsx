@@ -3,6 +3,7 @@ import DaumPostcode from "react-daum-postcode";
 import { initmemberData } from "../../func/donate_fn";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
+import { useLoginData } from "../context/userProvider";
 
 function Register() {
   const [userId, setUserId] = useState("");
@@ -15,6 +16,7 @@ function Register() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isPostcodeVisible, setIsPostcodeVisible] = useState(false);
   const [date, setDate] = useState("");
+  const {goPage} = useLoginData();
 
   // 오늘 날짜
   useEffect(() => {
@@ -55,8 +57,7 @@ function Register() {
       return;
     }
 
-    setErrorMessage("");
-
+    
     // 회원 정보 데이터
     let newData = {
       uuid: uuidv4(),
@@ -67,9 +68,11 @@ function Register() {
       date: date,
       address: address + " " + extraAddress,
     };
-
+    
     memberData.push(newData);
     localStorage.setItem("member-data", JSON.stringify(memberData));
+    setErrorMessage("");
+    goPage("/login")
   };
 
   // 주소가 선택되었을 때 처리하는 함수

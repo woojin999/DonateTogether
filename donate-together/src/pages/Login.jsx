@@ -4,7 +4,7 @@ import { initmemberData } from "../../func/donate_fn";
 import { useLoginData } from "../context/userProvider";
 
 function Login() {
-  const [userId, setUserId] = useState("admin");
+  const [userId, setUserId] = useState("guest");
   const [password, setPassword] = useState("1111");
   const [errorMessage, setErrorMessage] = useState("");
   const { loginSts, setLoginSts, goPage } = useLoginData();

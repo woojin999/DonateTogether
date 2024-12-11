@@ -57,7 +57,7 @@ function DonateDetail() {
     }
   };
   return (
-    <div className="grid gap-12 grid-cols-1 md:grid-cols-[7fr_3fr]">
+    <div className="grid gap-12 grid-cols-1 md:grid-cols-[7fr_3fr] container mx-auto px-12 lg:px-24 mt-10">
       <div>
         <div className="mb-14">
           <img

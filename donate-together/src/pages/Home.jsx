@@ -9,6 +9,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import DonateAdd from "../components/DonateAdd";
 import { useData } from "../context/StsProvider";
 import { useLoginData } from "../context/userProvider";
+import MainBanner from "../components/MainBanner";
 
 function Home(props) {
   const [dataUpdated, setDataUpdated] = useState(false); // 로컬스토리지 변경 여부
@@ -74,8 +75,9 @@ function Home(props) {
 
   return (
     <>
+      <MainBanner/>
       {boardSts == "list" && (
-        <div>
+        <div className="container mx-auto px-12 lg:px-24">
           <div className="mb-6 flex flex-col sm:flex-row items-center justify-between">
             <CategoryFilter
               category={filter.category}

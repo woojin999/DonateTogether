@@ -19,12 +19,12 @@ const initmemberData = () => {
       `
         [
             {
-                "uuid": "admin",
-                "userid":"admin",
+                "uuid": "guest",
+                "userid":"guest",
                 "password":"1111",
-                "username":"어드민",
-                "email":"admin@donate.com",
-                "address":"성남시 수정구",
+                "username":"게스트",
+                "email":"guest@donate.com",
+                "address":"서울특별시",
                 "date":"2024-12-11"
             },
             {
