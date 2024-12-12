@@ -15,7 +15,8 @@ const LoginCallback = () => {
 
   const fetchAccessToken = async (code) => {
     const REST_API_KEY = "1e4fffbd897ebf6b1036719547a9f2e2"; // 카카오 REST API 키
-    const REDIRECT_URI = "http://localhost:5173/kakaologin"; // 리디렉션 URI
+    const REDIRECT_URI = "http://localhost:5173/kakaologin"; // 개발용 리디렉션 URI
+    // const REDIRECT_URI = "https://donate-together-wjlee.vercel.app/kakaologin"; // 배포용 리디렉션 URI
 
     const tokenRequestData = new URLSearchParams();
     tokenRequestData.append("grant_type", "authorization_code");
