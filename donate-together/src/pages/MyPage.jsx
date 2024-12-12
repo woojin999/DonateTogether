@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoginData } from '../context/userProvider';
+import { useLoginData } from '../context/UserProvider';
 
 function MyPage(props) {
   const {handleLogout} = useLoginData();

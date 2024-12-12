@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { UserProvider } from "./userProvider";
+import { UserProvider } from "./UserProvider";
 
 // Context 생성
 const StsContext = createContext();

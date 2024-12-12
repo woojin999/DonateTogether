@@ -3,7 +3,7 @@ import DaumPostcode from "react-daum-postcode";
 import { initmemberData } from "../../func/donate_fn";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
-import { useLoginData } from "../context/userProvider";
+import { useLoginData } from "../context/UserProvider";
 
 function Register() {
   const [userId, setUserId] = useState("");

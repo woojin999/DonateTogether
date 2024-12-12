@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useData } from "../context/StsProvider";
 import { FaImage } from "react-icons/fa";
-import { useLoginData } from "../context/userProvider";
+import { useLoginData } from "../context/UserProvider";
 
 function DonateAdd({ clickButton, setDataUpdated }) {
   const [title, setTitle] = useState("");

@@ -12,7 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import { useData } from "./context/StsProvider";
-import { useLoginData } from "./context/userProvider";
+import { useLoginData } from "./context/UserProvider";
 
 function Header() {
   const navItems = [

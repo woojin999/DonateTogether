@@ -3,7 +3,7 @@ import { getDonateById, getDonationById } from "../api/donate";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import Donation from "../components/Donation";
-import { useLoginData } from "../context/userProvider";
+import { useLoginData } from "../context/UserProvider";
 
 function DonateDetail() {
   const donateData = JSON.parse(localStorage.getItem("donate-data"));

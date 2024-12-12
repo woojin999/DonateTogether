@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useLoginData } from "../context/userProvider";
+import { useLoginData } from "../context/UserProvider";
 
 function Donation({ setIsModalVisible, donateIdx }) {
   const [donationAmount, setDonationAmount] = useState(0); // 기부 금액 상태
