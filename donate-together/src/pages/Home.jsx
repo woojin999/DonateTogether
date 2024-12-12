@@ -15,7 +15,14 @@ function Home(props) {
   const [dataUpdated, setDataUpdated] = useState(false); // 로컬스토리지 변경 여부
   const [isGridView, setIsGridView] = useState(true); // 반응형 변수
   const { boardSts, setBoardSts } = useData(); // 게시글 상태변수
-  const { loginSts, goPage } = useLoginData(); // 로그인 상태변수
+  const {
+    loginSts,
+    goPage,
+    userKakaoData,
+    setUserKakaoData,
+    isLoadingKakao,
+    setIsLoadingKakao,
+  } = useLoginData(); // 로그인 context
   const [filter, setFilter] = useState({
     category: undefined,
   }); // 카테고리별 데이터 출력
@@ -50,6 +57,31 @@ function Home(props) {
     };
   }, []);
 
+  // 카카오로그인 처리
+  useEffect(() => {
+    const accessToken = sessionStorage.getItem("kakao_access_token");
+
+    if (accessToken) {
+      fetch("https://kapi.kakao.com/v2/user/me", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setUserKakaoData(data);
+          setIsLoadingKakao(false);
+        })
+        .catch((error) => {
+          console.error("사용자 정보 요청 실패:", error);
+          setIsLoadingKakao(false);
+        });
+    } else {
+      setIsLoadingKakao(false);
+    }
+  }, []);
+
   // boardSts 변환 버튼
   const clickButton = (e) => {
     let btnText = e.target.innerText;
@@ -75,9 +107,11 @@ function Home(props) {
 
   return (
     <>
-      <MainBanner/>
+      <MainBanner />
       {boardSts == "list" && (
         <div className="container mx-auto px-12 lg:px-24">
+          {/* 카카오 로그인 정보가 로딩 중이면 로딩 상태 표시 */}
+          {isLoadingKakao && <div>Loading Kakao Data...</div>}
           <div className="mb-6 flex flex-col sm:flex-row items-center justify-between">
             <CategoryFilter
               category={filter.category}

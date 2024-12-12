@@ -12,6 +12,7 @@ import DonateDetail from "./pages/DonateDetail.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import MyPage from "./pages/MyPage.jsx";
+import LoginCallback from "./components/LoginCallback.jsx";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login/>
+      },
+      {
+        path: "kakaologin",
+        element: <LoginCallback/>
       },
       {
         path: "mypage",
@@ -57,9 +62,9 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  // <StrictMode>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
     </QueryClientProvider>
-  </StrictMode>
+  // </StrictMode>
 );

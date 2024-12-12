@@ -33,7 +33,17 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const { boardSts, setBoardSts } = useData();
-  const { loginSts, loginName, setLoginName, setLoginEmail } = useLoginData();
+  const {
+    loginSts,
+    loginName,
+    setLoginName,
+    setLoginEmail,
+    kakaologinSts,
+    userKakaoData,
+    setUserKakaoData,
+    isLoadingKakao,
+    setIsLoadingKakao,
+  } = useLoginData();
 
   // 로그인시 회원 이름 가져오기 위해 렌더링
   useEffect(() => {
@@ -67,7 +77,7 @@ function Header() {
           ))}
         </nav>
         <ul className="flex gap-3 w-48 justify-end">
-          {!loginSts && (
+          {!loginSts && !userKakaoData && (
             <li className="cursor-pointer">
               <Link to="/login">
                 <p className="underline font-bold text-lg">로그인</p>
@@ -81,6 +91,21 @@ function Header() {
               </Link>
             </li>
           )}
+          {!isLoadingKakao && userKakaoData && (
+            <li className="cursor-pointer">
+              <Link to="/mypage">
+                <img src="" alt="" />
+                <p className="underline font-bold text-lg">
+                  {userKakaoData.properties.nickname}님
+                </p>
+              </Link>
+            </li>
+          )}
+
+          {/* {!isLoadingKakao && userKakaoData && (
+            <div>{`Logged in as ${userKakaoData.properties.nickname}`}</div>
+          )} */}
+
           <li className="cursor-pointer pt-1">
             <Link>
               <FaSearch className="size-5 hover:text-gray-800 " />

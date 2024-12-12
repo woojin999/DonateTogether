@@ -8,6 +8,7 @@ function Login() {
   const [password, setPassword] = useState("1111");
   const [errorMessage, setErrorMessage] = useState("");
   const { loginSts, setLoginSts, goPage } = useLoginData();
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,6 +39,20 @@ function Login() {
     }
     setErrorMessage("");
     goPage("/");
+  };
+
+  //   카카오 로그인 버튼 클릭 → 카카오 로그인 페이지로 리디렉션.
+  // 카카오 로그인 완료 → 카카오는 인증 코드 (code)를 redirect_uri에 첨부하여 리디렉션.
+  // 리디렉션 후 코드 추출 → 리액트에서 URL에서 인증 코드를 추출.
+  // 카카오 API로 Access Token 요청 → 인증 코드를 사용하여 access token을 요청.
+  // Access Token을 세션 스토리지에 저장 → 얻은 access_token을 sessionStorage에 저장하여 이후 사용.
+
+  const handleKakaoLogin = () => {
+    let REST_API_KEY = "1e4fffbd897ebf6b1036719547a9f2e2";
+    let REDIRECT_URI = "http://localhost:5173/kakaologin";
+
+    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
+    window.location.href = kakaoURL;
   };
 
   return (
@@ -102,6 +117,14 @@ function Login() {
             >
               로그인
             </button>
+          </div>
+
+          <div className="flex mt-5 mx-auto" onClick={handleKakaoLogin}>
+            <img
+              src="/images/kakao_login_large_wide.png"
+              alt=""
+              className="w-full h-12 object-contain"
+            />
           </div>
 
           <div className="text-center mt-4 text-gray-600 text-sm">
