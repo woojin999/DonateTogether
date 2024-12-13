@@ -13,13 +13,31 @@ function DonateDetail() {
   const [isModalVisible, setIsModalVisible] = useState(false); // 모달의 표시 여부
   const { loginSts, goPage, userKakaoData } = useLoginData();
 
+  // 모달 열기
+  const openModal = () => {
+    if (loginSts) {
+      setIsModalVisible(true);
+    } else if (userKakaoData) {
+      setIsModalVisible(true);
+    } else {
+      goPage("/login");
+    }
+  };
+  const handleScrollToTop = () => {
+    // 페이지를 최상단으로 스크롤
+    window.scrollTo({
+      top: 0,
+      // behavior: "smooth", // 부드럽게 스크롤
+    });
+  };
+
   useEffect(() => {
     const fetchDonate = async () => {
       const data = await getDonateById(id);
       if (data) {
         setDonate(data); // 데이터가 있으면 상태 업데이트
       } else {
-        console.log("No data found for this id");
+        console.log("값을 찾지 못함");
       }
     };
 
@@ -34,10 +52,11 @@ function DonateDetail() {
         setDonation(Donationdata); // 데이터가 있으면 상태 업데이트
         // console.log(donation);
       } else {
-        console.log("No data found for this id");
+        console.log("값을 찾지 못함");
       }
     };
     fetchDonation();
+    
   }, [id, donation]); // id,donation 값이 바뀔 때마다 호출
 
   // 조건부 렌더링: donate가 null 또는 undefined일 경우 렌더링을 하지 않음
@@ -48,16 +67,6 @@ function DonateDetail() {
     return <Loading />; // 데이터가 로드되지 않았을 때 로딩 메시지 출력
   }
 
-  // 모달 열기
-  const openModal = () => {
-    if (loginSts) {
-      setIsModalVisible(true);
-    } else if (userKakaoData) {
-      setIsModalVisible(true);
-    } else {
-      goPage("/login");
-    }
-  };
   return (
     <div className="grid gap-12 grid-cols-1 md:grid-cols-[7fr_3fr] container mx-auto px-12 lg:px-24 mt-10">
       <div>
@@ -148,11 +157,12 @@ function DonateDetail() {
                 key={item.id}
                 className="flex mb-3"
                 to={`/donates/${item.id}`}
+                onClick={handleScrollToTop}
               >
                 <img
                   src={`/images/${item.image}`}
                   alt={`/images/${item.image}`}
-                  className="w-24 h-auto max-h-16 object-contain mr-2"
+                  className="w-24 h-auto max-h-16 object-cover mr-2"
                 />
 
                 <p className="flex-1 h-14 line-clamp-2 overflow-hidden text-ellipsis pt-1">

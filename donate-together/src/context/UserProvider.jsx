@@ -31,6 +31,7 @@ export const UserProvider = ({ children }) => {
     setLoginName(null);
     setLoginEmail(null);
     setUserKakaoData(null);
+    setkakaoLoginSts(null);
     goPage("/");
   }, []);
 

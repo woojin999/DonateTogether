@@ -8,6 +8,9 @@ import {
   FaSearch,
   FaPersonBooth,
   FaUserCircle,
+  FaUserAlt,
+  FaOutdent,
+  FaUserSlash,
 } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import Button from "./components/Button";
@@ -44,6 +47,7 @@ function Header() {
     isLoadingKakao,
     setIsLoadingKakao,
     kakaoLoginSts,
+    handleLogout,
   } = useLoginData();
 
   // 로그인시 회원 이름 가져오기 위해 렌더링
@@ -71,41 +75,41 @@ function Header() {
             <NavLink
               key={item.id}
               to={item.to}
-              className="hover:text-gray-800 font-bold"
+              className="hover:text-gray-600 font-bold text-lg"
             >
               {item.label}
             </NavLink>
           ))}
         </nav>
-        <ul className="flex gap-3 w-48 justify-end">
+        <ul className="flex gap-5 w-48 justify-end">
           {!loginSts && !userKakaoData && (
-            <li className="cursor-pointer">
+            <li>
               <Link to="/login">
-                <p className="underline font-bold text-lg">로그인</p>
+                <p className="underline font-bold text-lg inline cursor-pointer">
+                  로그인
+                </p>
               </Link>
             </li>
           )}
           {loginSts && (
-            <li className="cursor-pointer">
+            <li>
               <Link to="/mypage">
-                <p className="underline font-bold text-lg">{loginName}님</p>
+                <p className="underline font-bold text-lg inline cursor-pointer">
+                  {loginName}님
+                </p>
               </Link>
             </li>
           )}
           {!isLoadingKakao && userKakaoData && (
-            <li className="cursor-pointer">
+            <li>
               <Link to="/mypage">
                 <img src="" alt="" />
-                <p className="underline font-bold text-lg">
+                <p className="underline font-bold text-lg inline cursor-pointer">
                   {userKakaoData.properties.nickname}님
                 </p>
               </Link>
             </li>
           )}
-
-          {/* {!isLoadingKakao && userKakaoData && (
-            <div>{`Logged in as ${userKakaoData.properties.nickname}`}</div>
-          )} */}
 
           <li className="cursor-pointer pt-1">
             <Link to="/search">
@@ -117,9 +121,15 @@ function Header() {
           </li>
         </ul>
       </div>
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={toggleMenu}
+        ></div>
+      )}
       {/* Mobile Menu */}
       <aside
-        className={`fixed top-0 right-0 w-80 h-full bg-teal-50 z-50 ${
+        className={`fixed top-0 right-0 w-80 h-full bg-gray-50 z-50 ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         } transform transition-transform duration-300 ease-in-out`}
       >
@@ -132,17 +142,67 @@ function Header() {
             <FaTimes className="h-6 w-6" />
           </button>
         </div>
-        <nav className="flex flex-col space-y-4 p-4 pl-6">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.id}
-              to={item.to}
-              className="hover:text-gray-300 font-bold"
+        <div className="p-10 pt-5">
+          {!loginSts && !userKakaoData && (
+            <div className="cursor-pointer">
+              <Link to="/login" onClick={toggleMenu}>
+                <p className="underline font-bold text-lg">로그인하세요</p>
+              </Link>
+            </div>
+          )}
+          {loginSts && (
+            <div className="cursor-pointer">
+              <Link to="/mypage" onClick={toggleMenu}>
+                <p className="underline font-bold text-lg">{loginName}님</p>
+              </Link>
+            </div>
+          )}
+          {!isLoadingKakao && userKakaoData && (
+            <div className="cursor-pointer">
+              <Link to="/mypage">
+                <img src="" alt="" />
+                <p className="underline font-bold text-lg">
+                  {userKakaoData.properties.nickname}님
+                </p>
+              </Link>
+            </div>
+          )}
+          <ul className="flex h-10 gap-3 mt-5 mb-16">
+            <li className="w-full h-full bg-white hover:bg-slate-200 rounded-lg cursor-pointer">
+              <Link to="/mypage" onClick={toggleMenu}>
+                <p className="pt-2 font-bold flex items-center justify-center gap-2">
+                  <FaUserAlt className="size-4" />
+                  MY
+                </p>
+              </Link>
+            </li>
+            <li
+              className="w-full h-full bg-white hover:bg-slate-200 rounded-lg cursor-pointer"
+              onClick={() => {
+                handleLogout();
+                toggleMenu();
+              }}
             >
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
+              <p className="pt-2 font-bold flex items-center justify-center gap-2">
+                <FaUserSlash className="size-4" />
+                logout
+              </p>
+            </li>
+          </ul>
+
+          <nav className="flex flex-col space-y-4">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.id}
+                to={item.to}
+                onClick={toggleMenu}
+                className="hover:text-gray-600 font-bold text-lg"
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
+        </div>
       </aside>
     </header>
   );
