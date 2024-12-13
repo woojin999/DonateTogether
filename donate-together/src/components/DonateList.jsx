@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DonateItem from "./DonateItem";
 
-function donateList({ filteredData, isGridView }) {
+function DonateList({ filteredData, isGridView }) {
   //보여줄 데이터의 수를 조정
   const [visibleCount, setVisibleCount] = useState(12);
 
@@ -50,4 +50,4 @@ function donateList({ filteredData, isGridView }) {
   );
 }
 
-export default donateList;
+export default DonateList;
