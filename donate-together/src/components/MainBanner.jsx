@@ -21,8 +21,8 @@ function MainBanner() {
       imgSrc: "/images/banner2.jpg", // 두 번째 배너 이미지 경로
       link: "/donates/2", // 클릭 시 이동할 링크
       alt: "기부 배너 2",
-      title: "미소가 아름다운 모습, 언제나 웃는 고래를 아시나요?", // 배너 제목
-      description: "사라지는 미소천사 상괭이를 지켜주세요", // 배너 설명
+      title: "여러분은 누군가에게 따뜻한 연탄이 되어보신 적이 있나요?", // 배너 제목
+      description: "나 아닌 누군가에게 기꺼이 연탄 한 장 되는 것", // 배너 설명
     },
     {
       imgSrc: "/images/banner3.jpg", // 세 번째 배너 이미지 경로

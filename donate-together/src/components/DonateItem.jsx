@@ -15,7 +15,7 @@ function DonateItem({ id, title, lastModified,topic, category, content, image })
           alt={image}
           className="h-52 w-full object-cover rounded-xl mb-3"
         />
-        <h2 className="text-2xl font-bold mb-2 text-gray-800 line-clamp-1">
+        <h2 className="text-xl font-bold mb-2 text-gray-800 line-clamp-2">
           {title}
         </h2>
         <p className="text-sm text-gray-600 mb-4">기부시작일: {lastModified}</p>
@@ -25,7 +25,7 @@ function DonateItem({ id, title, lastModified,topic, category, content, image })
         <span className="inline-block px-3 py-1 text-sm font-semibold text-gray-700 bg-red-200 rounded-full">
           {topic}
         </span>
-        <p className="text-lg text-gray-600 mt-2 line-clamp-2">{content}</p>
+        <p className="text-md text-gray-600 mt-2 line-clamp-2">{content}</p>
       </div>
     </Link>
   );

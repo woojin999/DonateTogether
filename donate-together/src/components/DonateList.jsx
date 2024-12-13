@@ -3,11 +3,11 @@ import DonateItem from "./DonateItem";
 
 function DonateList({ filteredData, isGridView }) {
   //보여줄 데이터의 수를 조정
-  const [visibleCount, setVisibleCount] = useState(12);
+  const [visibleCount, setVisibleCount] = useState(8);
 
   // 더보기 버튼 클릭 시 실행되는 함수
   const loadMoreItems = () => {
-    setVisibleCount(visibleCount + 12); // 현재 보여주는 개수에서 12개씩 추가
+    setVisibleCount(visibleCount + 8); // 현재 보여주는 개수에서 12개씩 추가
   };
 
   // 표시할 데이터

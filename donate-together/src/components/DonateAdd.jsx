@@ -88,6 +88,7 @@ function DonateAdd({ clickButton, setDataUpdated }) {
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                placeholder="제목을 입력해주세요."
                 className="w-full px-3 py-2 text-gray-800 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </td>
@@ -99,6 +100,8 @@ function DonateAdd({ clickButton, setDataUpdated }) {
                 type="text"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
+                maxLength={10}
+                placeholder="주제를 입력해주세요. (최대 10자 입력 가능)"
                 className="w-full px-3 py-2 text-gray-800 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </td>
@@ -132,8 +135,8 @@ function DonateAdd({ clickButton, setDataUpdated }) {
                 onChange={(e) => setContent(e.target.value)}
                 className="w-full px-3 py-2 text-gray-800 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
                 cols="60"
-                maxLength="300"
                 rows="10"
+                placeholder="내용을 입력해주세요"
               ></textarea>
             </td>
           </tr>

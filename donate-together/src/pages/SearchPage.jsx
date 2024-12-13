@@ -25,7 +25,7 @@ function SearchPage() {
       }),
     initialData: [],
   });
-  console.log(data, filter.searchText);
+  // console.log(data, filter.searchText);
 
   const searchingData = data.filter((val) =>
     val.title.toLowerCase().includes(filter.searchText.toLowerCase())
