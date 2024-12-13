@@ -44,6 +44,41 @@ function Home(props) {
     initialData: [],
   });
 
+  const handleScrollToTop = () => {
+    // 페이지를 최상단으로 스크롤
+    window.scrollTo({
+      top: 0,
+      // behavior: "smooth", // 부드럽게 스크롤
+    });
+  };
+
+  // boardSts 변환 버튼
+  const clickButton = (e) => {
+    let btnText = e.target.innerText;
+
+    switch (btnText) {
+      case "모금 제안":
+        if (loginSts) {
+          setBoardSts("write");
+          handleScrollToTop();
+        } else if (userKakaoData) {
+          setBoardSts("write");
+          handleScrollToTop();
+        } else {
+          goPage("/login");
+        }
+        break;
+      case "리스트":
+        setBoardSts("list");
+        break;
+      case "등록하기":
+        setBoardSts("list");
+        break;
+      default:
+        break;
+    }
+  };
+
   useEffect(() => {
     // localStorage의 데이터가 바뀌면 refetch 호출
     const handleStorageChange = () => {
@@ -82,36 +117,11 @@ function Home(props) {
     }
   }, []);
 
-  // boardSts 변환 버튼
-  const clickButton = (e) => {
-    let btnText = e.target.innerText;
-
-    switch (btnText) {
-      case "모금 제안":
-        if (loginSts) {
-          setBoardSts("write");
-        } else {
-          goPage("/login");
-        }
-        break;
-      case "리스트":
-        setBoardSts("list");
-        break;
-      case "등록하기":
-        setBoardSts("list");
-        break;
-      default:
-        break;
-    }
-  };
-
   return (
     <>
-      <MainBanner />
+      {boardSts == "list" && <MainBanner />}
       {boardSts == "list" && (
         <div className="container mx-auto px-12 lg:px-24">
-          {/* 카카오 로그인 정보가 로딩 중이면 로딩 상태 표시 */}
-          {isLoadingKakao && <div>Loading Kakao Data...</div>}
           <div className="mb-6 flex flex-col sm:flex-row items-center justify-between">
             <CategoryFilter
               category={filter.category}

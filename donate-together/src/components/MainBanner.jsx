@@ -12,24 +12,24 @@ function MainBanner() {
   const bannerData = [
     {
       imgSrc: "/images/banner1.jpg", // 첫 번째 배너 이미지 경로
-      link: "/donate", // 클릭 시 이동할 링크
+      link: "/donates/3", // 클릭 시 이동할 링크
       alt: "기부 배너 1",
-      title: "함께하는 기부", // 배너 제목
-      description: "작은 기부로 큰 변화를 만들어보세요.", // 배너 설명
+      title: "겨울의 차가움을 녹이는 온기 프로젝트 '온 나눔'", // 배너 제목
+      description: "추위를 녹이는 따뜻한 나눔.", // 배너 설명
     },
     {
       imgSrc: "/images/banner2.jpg", // 두 번째 배너 이미지 경로
-      link: "/login", // 클릭 시 이동할 링크
+      link: "/donates/2", // 클릭 시 이동할 링크
       alt: "기부 배너 2",
-      title: "변화를 위한 캠페인", // 배너 제목
-      description: "당신의 참여가 더 나은 세상을 만듭니다.", // 배너 설명
+      title: "미소가 아름다운 모습, 언제나 웃는 고래를 아시나요?", // 배너 제목
+      description: "사라지는 미소천사 상괭이를 지켜주세요", // 배너 설명
     },
     {
       imgSrc: "/images/banner3.jpg", // 세 번째 배너 이미지 경로
-      link: "/campaign", // 클릭 시 이동할 링크
+      link: "/donates/4", // 클릭 시 이동할 링크
       alt: "기부 배너 3",
-      title: "우리의 작은 힘", // 배너 제목
-      description: "기부로 함께 성장하는 사회를 만듭니다.", // 배너 설명
+      title: "겨울이 두렵습니다", // 배너 제목
+      description: "어르신에게 따뜻한 온기를 선물해 주세요.", // 배너 설명
     },
   ];
 

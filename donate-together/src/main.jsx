@@ -13,6 +13,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import MyPage from "./pages/MyPage.jsx";
 import LoginCallback from "./components/LoginCallback.jsx";
+import SearchPage from "./pages/SearchPage.jsx";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "donates/:id",
         element: <DonateDetail />,
+      },
+      {
+        path: "search",
+        element: <SearchPage/>
       },
     ],
   },

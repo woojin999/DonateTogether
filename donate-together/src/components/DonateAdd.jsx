@@ -10,12 +10,7 @@ function DonateAdd({ clickButton, setDataUpdated }) {
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
   const { boardSts, setBoardSts } = useData();
-  const { loginName, loginEmail } = useLoginData();
-
-  const uploadFile = useRef(null);
-
-  // 파일저장변수 업데이트 함수
-  const updateFileInfo = (x) => (uploadFile.current = x);
+  const { loginName, loginEmail, loginSts, userKakaoData } = useLoginData();
 
   const baseData = JSON.parse(localStorage.getItem("donate-data"));
 
@@ -46,7 +41,7 @@ function DonateAdd({ clickButton, setDataUpdated }) {
 
     let data = {
       id: newId,
-      writer:loginName,
+      writer: loginSts ? loginName : userKakaoData.properties.nickname,
       title: title,
       topic: topic,
       category: category,
@@ -69,7 +64,7 @@ function DonateAdd({ clickButton, setDataUpdated }) {
   };
 
   return (
-    <>
+    <div className="mt-16">
       <h2 className="text-3xl font-extrabold mb-6 text-center">모금 제안</h2>
       <table className="table-auto w-4/5 mx-auto bg-slate-50 border-collapse rounded-lg shadow-md">
         <tbody>
@@ -80,20 +75,7 @@ function DonateAdd({ clickButton, setDataUpdated }) {
             <td className="px-4 py-2">
               <input
                 type="text"
-                value={loginName}
-                readOnly
-                className="w-full px-3 py-2 text-gray-500 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-not-allowed"
-              />
-            </td>
-          </tr>
-          <tr className="border-b">
-            <td className="px-4 py-2 text-sm font-bold text-gray-600">
-              이메일
-            </td>
-            <td className="px-4 py-2">
-              <input
-                type="text"
-                value={loginEmail}
+                value={loginSts ? loginName : userKakaoData.properties.nickname}
                 readOnly
                 className="w-full px-3 py-2 text-gray-500 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-not-allowed"
               />
@@ -197,7 +179,7 @@ function DonateAdd({ clickButton, setDataUpdated }) {
           등록하기
         </button>
       </div>
-    </>
+    </div>
   );
 }
 

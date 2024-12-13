@@ -11,7 +11,7 @@ function DonateDetail() {
   const [donate, setDonate] = useState(null); // 초기값을 null로 설정
   const [donation, setDonation] = useState(null); // 초기값을 null로 설정
   const [isModalVisible, setIsModalVisible] = useState(false); // 모달의 표시 여부
-  const { loginSts,goPage } = useLoginData();
+  const { loginSts, goPage, userKakaoData } = useLoginData();
 
   useEffect(() => {
     const fetchDonate = async () => {
@@ -52,8 +52,10 @@ function DonateDetail() {
   const openModal = () => {
     if (loginSts) {
       setIsModalVisible(true);
-    } else{
-      goPage("/login")
+    } else if (userKakaoData) {
+      setIsModalVisible(true);
+    } else {
+      goPage("/login");
     }
   };
   return (

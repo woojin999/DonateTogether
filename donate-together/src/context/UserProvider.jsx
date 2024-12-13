@@ -8,6 +8,10 @@ export const UserProvider = ({ children }) => {
     const savedLoginInfo = sessionStorage.getItem("loginInfo");
     return savedLoginInfo ? JSON.parse(savedLoginInfo) : null; // 문자열을 객체로 변환
   });
+  const [kakaoLoginSts, setkakaoLoginSts] = useState(() => {
+    const savedLoginInfo = sessionStorage.getItem("kakao_access_token");
+    return savedLoginInfo ? savedLoginInfo : null; // 문자열을 객체로 변환
+  });
 
   const [loginName, setLoginName] = useState(null); // 로그인회원 이름 저장
   const [loginEmail, setLoginEmail] = useState(null); // 로그인회원 이름 저장
@@ -45,6 +49,8 @@ export const UserProvider = ({ children }) => {
         setUserKakaoData,
         isLoadingKakao,
         setIsLoadingKakao,
+        kakaoLoginSts,
+        setkakaoLoginSts,
       }}
     >
       {children}

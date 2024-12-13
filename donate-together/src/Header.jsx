@@ -43,6 +43,7 @@ function Header() {
     setUserKakaoData,
     isLoadingKakao,
     setIsLoadingKakao,
+    kakaoLoginSts,
   } = useLoginData();
 
   // 로그인시 회원 이름 가져오기 위해 렌더링
@@ -107,7 +108,7 @@ function Header() {
           )} */}
 
           <li className="cursor-pointer pt-1">
-            <Link>
+            <Link to="/search">
               <FaSearch className="size-5 hover:text-gray-800 " />
             </Link>
           </li>

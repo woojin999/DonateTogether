@@ -119,11 +119,11 @@ function Login() {
             </button>
           </div>
 
-          <div className="flex mt-5 mx-auto" onClick={handleKakaoLogin}>
+          <div className="flex justify-center mt-5 mx-auto" onClick={handleKakaoLogin}>
             <img
               src="/images/kakao_login_large_wide.png"
-              alt=""
-              className="w-full h-12 object-contain"
+              alt="kakao_login"
+              className="h-12 object-contain cursor-pointer"
             />
           </div>
 

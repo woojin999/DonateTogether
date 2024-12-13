@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLoginData } from "../context/UserProvider";
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const LoginCallback = () => {
   const navigate = useNavigate();
+
+  const { kakaoLoginSts, setkakaoLoginSts } = useLoginData();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -33,8 +37,8 @@ const LoginCallback = () => {
       if (!tokenResponse.ok) {
         // 상태 코드가 2xx가 아닌 경우 에러 처리
         const errorData = await tokenResponse.json();
-        
-        console.error('토큰 요청 실패:', errorData); // 에러 정보 출력
+
+        console.error("토큰 요청 실패:", errorData); // 에러 정보 출력
         return; // 에러가 발생하면 이후 처리를 막음
       }
 
@@ -44,6 +48,7 @@ const LoginCallback = () => {
         // Access token을 세션 스토리지에 저장
         sessionStorage.setItem("kakao_access_token", tokenData.access_token);
         // console.log(tokenData.access_token);
+        setkakaoLoginSts(sessionStorage.getItem("kakao_access_token"));
 
         // 로그인 후 대시보드 등으로 이동
         navigate("/");
@@ -55,7 +60,14 @@ const LoginCallback = () => {
     }
   };
 
-  return <div>로그인 중...</div>;
+  return (
+      <div className="flex items-center justify-center h-[800px] ">
+        <div className="text-center">
+          <AiOutlineLoading3Quarters className="animate-spin text-6xl text-gray-500 mx-auto mb-4" />
+          <p className="text-xl font-semibold text-gray-700">로그인중 ...</p>
+        </div>
+      </div>
+    );
 };
 
 export default LoginCallback;
