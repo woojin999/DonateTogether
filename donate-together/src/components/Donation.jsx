@@ -6,7 +6,7 @@ function Donation({ setIsModalVisible, donateIdx }) {
   const [donationAmount, setDonationAmount] = useState(0); // 기부 금액 상태
   const [comment, setComment] = useState("");
   const [date, setDate] = useState("");
-  const {loginName,userKakaoData,loginSts} = useLoginData();
+  const {loginName,userKakaoData,loginSts,loginId} = useLoginData();
 
   useEffect(() => {
     const currentDate = new Date().toISOString().split("T")[0];
@@ -42,6 +42,7 @@ function Donation({ setIsModalVisible, donateIdx }) {
       donateIdx: parseInt(donateIdx),
       price: donationAmount,
       contributor: loginSts ? loginName : userKakaoData.properties.nickname,
+      userid: loginSts ? loginId : userKakaoData.properties.nickname,
       comment: comment,
       donationDate: date,
     };

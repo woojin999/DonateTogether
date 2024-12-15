@@ -40,6 +40,7 @@ function Header() {
     loginSts,
     loginName,
     setLoginName,
+    setLoginId,
     setLoginEmail,
     kakaologinSts,
     userKakaoData,
@@ -56,6 +57,7 @@ function Header() {
       let data = JSON.parse(sessionStorage.getItem("loginInfo"));
       setLoginName(data.username);
       setLoginEmail(data.email);
+      setLoginId(data.userid)
     }
   }, [loginSts]);
 
@@ -92,7 +94,7 @@ function Header() {
             </li>
           )}
           {loginSts && (
-            <li>
+            <li className="hidden sm:flex">
               <Link to="/mypage">
                 <p className="underline font-bold text-lg inline cursor-pointer">
                   {loginName}님
@@ -101,7 +103,7 @@ function Header() {
             </li>
           )}
           {!isLoadingKakao && userKakaoData && (
-            <li>
+            <li className="hidden sm:flex">
               <Link to="/mypage">
                 <img src="" alt="" />
                 <p className="underline font-bold text-lg inline cursor-pointer">
@@ -168,7 +170,7 @@ function Header() {
             </div>
           )}
           <ul className="flex h-10 gap-3 mt-5 mb-16">
-            <li className="w-full h-full bg-white hover:bg-slate-200 rounded-lg cursor-pointer">
+            <li className="w-full h-full bg-white hover:bg-slate-200 transition-all duration-300 rounded-lg cursor-pointer">
               <Link to="/mypage" onClick={toggleMenu}>
                 <p className="pt-2 font-bold flex items-center justify-center gap-2">
                   <FaUserAlt className="size-4" />
@@ -177,7 +179,7 @@ function Header() {
               </Link>
             </li>
             <li
-              className="w-full h-full bg-white hover:bg-slate-200 rounded-lg cursor-pointer"
+              className="w-full h-full bg-white hover:bg-slate-200 transition-all duration-300 rounded-lg cursor-pointer"
               onClick={() => {
                 handleLogout();
                 toggleMenu();

@@ -14,7 +14,8 @@ export const UserProvider = ({ children }) => {
   });
 
   const [loginName, setLoginName] = useState(null); // 로그인회원 이름 저장
-  const [loginEmail, setLoginEmail] = useState(null); // 로그인회원 이름 저장
+  const [loginId, setLoginId] = useState(null); // 로그인회원 아이디 저장
+  const [loginEmail, setLoginEmail] = useState(null); // 로그인회원 이메일 저장
 
   const [userKakaoData, setUserKakaoData] = useState(null);
   const [isLoadingKakao, setIsLoadingKakao] = useState(true); // 로딩 상태 추가
@@ -30,6 +31,7 @@ export const UserProvider = ({ children }) => {
     setLoginSts(null);
     setLoginName(null);
     setLoginEmail(null);
+    setLoginId(null);
     setUserKakaoData(null);
     setkakaoLoginSts(null);
     goPage("/");
@@ -43,6 +45,8 @@ export const UserProvider = ({ children }) => {
         setLoginName,
         loginEmail,
         setLoginEmail,
+        loginId,
+        setLoginId,
         setLoginSts,
         handleLogout,
         goPage,

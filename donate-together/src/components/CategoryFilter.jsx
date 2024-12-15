@@ -28,7 +28,7 @@ function CategoryFilter({ category, onChange }) {
           <li
             key={cate.title}
             onClick={() => handleClick(cate)}
-            className={`cursor-pointer border border-gray-200 rounded-2xl p-2
+            className={`cursor-pointer border border-gray-200 transition-all duration-300 rounded-2xl p-2
               ${
                 activeCategory === cate.title
                   ? "bg-stone-900 text-white"
