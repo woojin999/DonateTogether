@@ -26,7 +26,8 @@ function Home(props) {
   const [filter, setFilter] = useState({
     category: undefined,
   }); // 카테고리별 데이터 출력
-
+  
+  console.log(userKakaoData);
   // 카테고리 필터
   const handleFilter = (key, value) =>
     setFilter({
