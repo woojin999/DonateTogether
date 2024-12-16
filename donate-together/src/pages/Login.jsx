@@ -48,7 +48,7 @@ function Login() {
   // Access Token을 세션 스토리지에 저장 → 얻은 access_token을 sessionStorage에 저장하여 이후 사용.
 
   const handleKakaoLogin = () => {
-    let REST_API_KEY = "1e4fffbd897ebf6b1036719547a9f2e2";
+    let REST_API_KEY = "c6a565a9fd74e9db2346c1c630dd5faf";
     let REDIRECT_URI = "http://localhost:5173/kakaologin";
 
     const kakaoURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;

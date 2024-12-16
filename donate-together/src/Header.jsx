@@ -28,9 +28,9 @@ function Header() {
     },
     {
       id: "mydonate",
-      label: "나의기부",
+      label: "마이페이지",
       icon: <FaInfoCircle />,
-      to: "/mydonate",
+      to: "/mypage",
     },
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -57,13 +57,14 @@ function Header() {
       let data = JSON.parse(sessionStorage.getItem("loginInfo"));
       setLoginName(data.username);
       setLoginEmail(data.email);
-      setLoginId(data.userid)
+      setLoginId(data.userid);
     }
   }, [loginSts]);
 
   const handleChangeSts = () => {
     setBoardSts("list");
   };
+
   return (
     <header className="sticky top-0 bg-white px-4 z-30 border-b-2 ">
       <div className="container mx-auto px-12 lg:px-24 flex justify-between items-center h-20">
@@ -104,8 +105,14 @@ function Header() {
           )}
           {!isLoadingKakao && userKakaoData && (
             <li className="hidden sm:flex">
-              <Link to="/mypage">
-                <img src="" alt="" />
+              <Link to="/mypage" className="flex gap-1">
+                {userKakaoData.kakao_account.profile_image_needs_agreement && (
+                  <img
+                    src={userKakaoData.properties.thumbnail_image}
+                    alt="카카오 프사"
+                    className="w-6 h-6 object-cover"
+                  />
+                )}
                 <p className="underline font-bold text-lg inline cursor-pointer">
                   {userKakaoData.properties.nickname}님
                 </p>
@@ -169,28 +176,46 @@ function Header() {
               </Link>
             </div>
           )}
-          <ul className="flex h-10 gap-3 mt-5 mb-16">
-            <li className="w-full h-full bg-white hover:bg-slate-200 transition-all duration-300 rounded-lg cursor-pointer">
-              <Link to="/mypage" onClick={toggleMenu}>
-                <p className="pt-2 font-bold flex items-center justify-center gap-2">
-                  <FaUserAlt className="size-4" />
-                  MY
-                </p>
-              </Link>
-            </li>
-            <li
-              className="w-full h-full bg-white hover:bg-slate-200 transition-all duration-300 rounded-lg cursor-pointer"
-              onClick={() => {
-                handleLogout();
-                toggleMenu();
-              }}
-            >
-              <p className="pt-2 font-bold flex items-center justify-center gap-2">
-                <FaUserSlash className="size-4" />
-                logout
-              </p>
-            </li>
-          </ul>
+          {!loginSts && !userKakaoData && (
+            <>
+              <ul className="flex h-10 gap-3 mt-5 mb-16">
+                <li className="w-full h-full bg-white hover:bg-slate-200 transition-all duration-300 rounded-lg cursor-pointer">
+                  <Link to="/login" onClick={toggleMenu}>
+                    <p className="pt-2 font-bold flex items-center justify-center gap-2">
+                      <FaUserAlt className="size-4" />
+                      MY
+                    </p>
+                  </Link>
+                </li>
+              </ul>
+            </>
+          )}
+          {(loginSts || userKakaoData) && (
+            <>
+              <ul className="flex h-10 gap-3 mt-5 mb-16">
+                <li className="w-full h-full bg-white hover:bg-slate-200 transition-all duration-300 rounded-lg cursor-pointer">
+                  <Link to="/mypage" onClick={toggleMenu}>
+                    <p className="pt-2 font-bold flex items-center justify-center gap-2">
+                      <FaUserAlt className="size-4" />
+                      MY
+                    </p>
+                  </Link>
+                </li>
+                <li
+                  className="w-full h-full bg-white hover:bg-slate-200 transition-all duration-300 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    handleLogout();
+                    toggleMenu();
+                  }}
+                >
+                  <p className="pt-2 font-bold flex items-center justify-center gap-2">
+                    <FaUserSlash className="size-4" />
+                    logout
+                  </p>
+                </li>
+              </ul>
+            </>
+          )}
 
           <nav className="flex flex-col space-y-4">
             {navItems.map((item) => (

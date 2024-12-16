@@ -10,10 +10,15 @@ function MyPage(props) {
     { subMenu: "기부내역", subpg: "mydonatelist" },
     { subMenu: "개인정보", subpg: "myinfo" },
   ];
-  const { loginSts, loginName, loginId, isLoadingKakao, userKakaoData } =
-    useLoginData();
+  const {
+    loginSts,
+    loginName,
+    loginId,
+    isLoadingKakao,
+    userKakaoData,
+    handleLogout,
+  } = useLoginData();
   const [subMenu, setSubMenu] = useState("my"); // 서브메뉴 상태변수
-  
 
   // 메뉴 변경
   const clickButton = (e) => {
@@ -55,6 +60,13 @@ function MyPage(props) {
               {v.subMenu}
             </li>
           ))}
+          <li
+            key="logout"
+            className="py-2 px-4 bg-gray-200 border-r hover:bg-gray-300 transition-all duration-300 cursor-pointer rounded-2xl"
+            onClick={handleLogout}
+          >
+            로그아웃
+          </li>
         </ul>
       </div>
       {subMenu == "my" && <MypageMy />}

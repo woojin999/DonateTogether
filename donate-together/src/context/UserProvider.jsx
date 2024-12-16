@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const UserContext = createContext();
@@ -24,6 +24,7 @@ export const UserProvider = ({ children }) => {
   const goPage = useCallback((param1, param2) => {
     goNav(param1, param2);
   }, []);
+  
 
   const handleLogout = useCallback(() => {
     sessionStorage.removeItem("loginInfo");
@@ -36,6 +37,30 @@ export const UserProvider = ({ children }) => {
     setkakaoLoginSts(null);
     goPage("/");
   }, []);
+
+  useEffect(() => {
+      const accessToken = sessionStorage.getItem("kakao_access_token");
+  
+      if (accessToken) {
+        fetch("https://kapi.kakao.com/v2/user/me", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setUserKakaoData(data);
+            setIsLoadingKakao(false);
+          })
+          .catch((error) => {
+            console.error("사용자 정보 요청 실패:", error);
+            setIsLoadingKakao(false);
+          });
+      } else {
+        setIsLoadingKakao(false);
+      }
+    }, []);
 
   return (
     <UserContext.Provider
