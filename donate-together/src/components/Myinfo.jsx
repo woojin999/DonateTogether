@@ -5,8 +5,6 @@ function Myinfo(props) {
   const userinfo = JSON.parse(sessionStorage.getItem("loginInfo"));
   const kakao_access_token = sessionStorage.getItem("kakao_access_token");
   const { userKakaoData } = useLoginData();
-  console.log(userKakaoData);
-  
 
   return (
     <div className="mt-10">

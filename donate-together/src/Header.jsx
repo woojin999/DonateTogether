@@ -25,13 +25,7 @@ function Header() {
       label: "캠페인",
       icon: <FaInfoCircle />,
       to: "/campaign",
-    },
-    {
-      id: "mydonate",
-      label: "마이페이지",
-      icon: <FaInfoCircle />,
-      to: "/mypage",
-    },
+    }
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -83,6 +77,24 @@ function Header() {
               {item.label}
             </NavLink>
           ))}
+          {!loginSts && !userKakaoData && (
+            <Link
+              key="mypg"
+              to="/login"
+              className="hover:text-gray-600 font-bold text-lg"
+            >
+              마이페이지
+            </Link>
+          )}
+          {loginSts && (
+            <Link
+              key="mypg"
+              to="/mypage"
+              className="hover:text-gray-600 font-bold text-lg"
+            >
+              마이페이지
+            </Link>
+          )}
         </nav>
         <ul className="flex gap-5 w-48 justify-end">
           {!loginSts && !userKakaoData && (

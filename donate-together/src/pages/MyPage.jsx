@@ -54,7 +54,9 @@ function MyPage(props) {
           {categories.map((v, i) => (
             <li
               key={i}
-              className="py-2 px-4 bg-gray-200 border-r hover:bg-gray-300 transition-all duration-300 cursor-pointer rounded-2xl"
+              className={`py-2 px-4 bg-gray-200 border-r hover:bg-gray-300 transition-all duration-300 cursor-pointer rounded-2xl ${
+                v.subpg == subMenu ? "bg-gray-300" : ""
+              }`}
               onClick={clickButton}
             >
               {v.subMenu}
