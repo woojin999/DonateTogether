@@ -49,8 +49,8 @@ function Login() {
 
   const handleKakaoLogin = () => {
     let REST_API_KEY = "c6a565a9fd74e9db2346c1c630dd5faf";
-    let REDIRECT_URI = "http://localhost:5173/kakaologin"; // 개발용 리디렉션 URI
-    // const REDIRECT_URI = "https://donate-together-wjlee.vercel.app/kakaologin"; // 배포용 리디렉션 URI
+    // let REDIRECT_URI = "http://localhost:5173/kakaologin"; // 개발용 리디렉션 URI
+    const REDIRECT_URI = "https://donate-together-wjlee.vercel.app/kakaologin"; // 배포용 리디렉션 URI
 
     const kakaoURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
     window.location.href = kakaoURL;
