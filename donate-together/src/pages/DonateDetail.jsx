@@ -56,7 +56,6 @@ function DonateDetail() {
       }
     };
     fetchDonation();
-    
   }, [id, donation]); // id,donation 값이 바뀔 때마다 호출
 
   // 조건부 렌더링: donate가 null 또는 undefined일 경우 렌더링을 하지 않음
@@ -67,6 +66,7 @@ function DonateDetail() {
     return <Loading />; // 데이터가 로드되지 않았을 때 로딩 메시지 출력
   }
 
+
   return (
     <div className="grid gap-12 grid-cols-1 md:grid-cols-[7fr_3fr] container mx-auto px-12 lg:px-24 mt-10">
       <div>
@@ -74,9 +74,14 @@ function DonateDetail() {
           <img
             src={`/images/${donate.image}`}
             alt={donate.image}
-            className="rounded-2xl w-full h-[500px] object-cover mb-5"
+            className="rounded-2xl w-full h-[500px] object-cover mb-10"
           />
-          <p>{donate.content}</p>
+          <h2 className="mb-2 font-bold text-xl">{donate.topic}</h2>
+          {donate.content.split("^").map((text, index) => (
+            <p key={index} className="mb-8">
+              {text}
+            </p>
+          ))}
         </div>
         <div>
           <p className="mb-5 font-bold text-2xl">기부내역</p>

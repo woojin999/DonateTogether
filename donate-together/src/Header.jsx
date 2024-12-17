@@ -86,7 +86,7 @@ function Header() {
               마이페이지
             </Link>
           )}
-          {loginSts && (
+          {(loginSts || userKakaoData) && (
             <Link
               key="mypg"
               to="/mypage"
