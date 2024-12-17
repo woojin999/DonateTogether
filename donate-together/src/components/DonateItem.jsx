@@ -15,7 +15,7 @@ function DonateItem({ id, title, lastModified,topic, category, content, image })
           alt={image}
           className="h-52 w-full object-cover rounded-xl mb-3"
         />
-        <h2 className="text-xl font-bold mb-2 text-gray-800 line-clamp-2">
+        <h2 className="text-xl font-bold mb-2 h-[56px] text-gray-800 line-clamp-2">
           {title}
         </h2>
         <p className="text-sm text-gray-600 mb-4">기부시작일: {lastModified}</p>

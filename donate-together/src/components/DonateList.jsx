@@ -12,8 +12,11 @@ function DonateList({ filteredData, isGridView }) {
 
   // 표시할 데이터
   const itemsToShow = filteredData.slice(0, visibleCount);
+  console.log(filteredData);
+  
   return (
     <>
+    
     <div
       className={`grid gap-6 ${
         isGridView

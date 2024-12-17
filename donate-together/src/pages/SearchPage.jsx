@@ -46,9 +46,16 @@ function SearchPage() {
         {filter.searchText !== "" ? (
           <>
             <div className="mb-5">
-              <h2 className="font-bold text-2xl">모금함 ({searchingData.length})</h2>
+              <h2 className="font-bold text-2xl">
+                모금함 ({searchingData.length})
+              </h2>
             </div>
             <DonateList filteredData={searchingData} isGridView={isGridView} />
+            {searchingData.length == 0 && (
+              <div className="h-[300px] pt-8 text-center">
+                검색내역이 없습니다.
+              </div>
+            )}
           </>
         ) : (
           <>
