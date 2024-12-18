@@ -1,7 +1,7 @@
 # React -  DonateTogether Project
 
 - 리액트를 활용하여 기부하기 사이트 구현
-- [Plants to the Rescue 이용해보기](https://donate-together-wjlee.vercel.app/)
+- [DonateTogethe 이용해보기](https://donate-together-wjlee.vercel.app/)
 
 
 
