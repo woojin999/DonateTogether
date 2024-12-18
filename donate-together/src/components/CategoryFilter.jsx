@@ -22,8 +22,8 @@ function CategoryFilter({ category, onChange }) {
   };
 
   return (
-    <div className="container mx-auto p-5">
-      <ul className="flex gap-4 justify-center">
+    <div className="container mx-auto">
+      <ul className="grid grid-cols-3 gap-4 justify-center lg:flex lg:flex-wrap lg:gap-4">
         {categories.map((cate) => (
           <li
             key={cate.title}

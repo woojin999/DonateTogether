@@ -63,11 +63,11 @@ function Header() {
     <header className="sticky top-0 bg-white px-4 z-30 border-b-2 ">
       <div className="container mx-auto px-12 lg:px-24 flex justify-between items-center h-20">
         <div>
-          <Link to="/" className="text-2xl font-bold" onClick={handleChangeSts}>
+          <Link to="/" className="text-xl md:text-2xl font-bold whitespace-nowrap" onClick={handleChangeSts}>
             Donate Together
           </Link>
         </div>
-        <nav className="hidden md:flex space-x-8">
+        <nav className="hidden md:flex space-x-5">
           {navItems.map((item) => (
             <NavLink
               key={item.id}
@@ -98,7 +98,7 @@ function Header() {
         </nav>
         <ul className="flex gap-5 w-48 justify-end">
           {!loginSts && !userKakaoData && (
-            <li>
+            <li className="hidden sm:flex">
               <Link to="/login">
                 <p className="underline font-bold text-lg inline cursor-pointer">
                   로그인

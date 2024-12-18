@@ -38,7 +38,7 @@ function MyPage(props) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto min-h-[700px] px-24 lg:px-36 mt-16">
+    <div className="max-w-4xl mx-auto min-h-[700px] px-10 sm:px-24 lg:px-36 mt-16">
       <h2 className="font-bold text-3xl text-center">마이페이지</h2>
       <div className="mt-7">
         <p className="mb-2 text-xl">기부천사</p>
@@ -50,7 +50,9 @@ function MyPage(props) {
         )}
       </div>
       <div className="mt-7 border rounded-2xl shadow-md overflow-hidden p-2">
-        <ul className="flex justify-evenly">
+        <ul
+          className="grid grid-cols-2 gap-4 sm:flex sm:flex-wrap justify-evenly"
+        >
           {categories.map((v, i) => (
             <li
               key={i}
