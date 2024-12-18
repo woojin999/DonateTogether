@@ -34,6 +34,9 @@ function MydonateList(props) {
     <div className="mt-10">
       <h2 className="text-2xl font-bold mb-5">나의 기부내역</h2>
       <ul>
+        {resultData.length == 0 && (
+          <p>기부 내역이 없습니다.</p>
+        )}
         {resultData.map((v) =>
           v.donations.map((donation, index) => (
             <li key={index} className="border rounded-2xl p-5 mb-5">
