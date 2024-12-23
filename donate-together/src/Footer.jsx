@@ -15,8 +15,8 @@ function Footer() {
           <Link to="/campaign" className="text-gray-400 hover:text-white mx-2">
           Campaign
           </Link>
-          <Link to="/mydonate" className="text-gray-400 hover:text-white mx-2">
-          Mydonate
+          <Link to="/mypage" className="text-gray-400 hover:text-white mx-2">
+          MyPage
           </Link>
         </div>
       </div>
