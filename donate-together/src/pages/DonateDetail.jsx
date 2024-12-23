@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import Donation from "../components/Donation";
 import { useLoginData } from "../context/UserProvider";
+import KakaoShare from "../components/KakaoShare";
 
 function DonateDetail() {
   const donateData = JSON.parse(localStorage.getItem("donate-data"));
@@ -12,6 +13,7 @@ function DonateDetail() {
   const [donation, setDonation] = useState(null); // 초기값을 null로 설정
   const [isModalVisible, setIsModalVisible] = useState(false); // 모달의 표시 여부
   const { loginSts, goPage, userKakaoData } = useLoginData();
+  console.log("asd");
 
   // 모달 열기
   const openModal = () => {
@@ -42,7 +44,7 @@ function DonateDetail() {
     };
 
     fetchDonate(); // 데이터 fetch 호출
-  }, [id, donate]); // id,donate 값이 바뀔 때마다 호출
+  }, [id]); // id,donate 값이 바뀔 때마다 호출
 
   useEffect(() => {
     const fetchDonation = async () => {
@@ -56,7 +58,7 @@ function DonateDetail() {
       }
     };
     fetchDonation();
-  }, [id, donation]); // id,donation 값이 바뀔 때마다 호출
+  }, [id]); // id,donation 값이 바뀔 때마다 호출
 
   // 조건부 렌더링: donate가 null 또는 undefined일 경우 렌더링을 하지 않음
   if (!donate) {
@@ -65,7 +67,6 @@ function DonateDetail() {
   if (!donation) {
     return <Loading />; // 데이터가 로드되지 않았을 때 로딩 메시지 출력
   }
-
 
   return (
     <div className="grid gap-12 grid-cols-1 md:grid-cols-[7fr_3fr] container mx-auto px-12 lg:px-24 mt-10">
@@ -143,12 +144,15 @@ function DonateDetail() {
           <p className="text-xs mb-4">후원글 작성자 : {donate.writer}</p>
 
           {/* 기부하기 버튼 */}
-          <button
-            onClick={openModal}
-            className="w-full py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-300"
-          >
-            기부하기
-          </button>
+          <div className="flex gap-3">
+            <KakaoShare id={id} title={donate.title} />
+            <button
+              onClick={openModal}
+              className="w-full py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-300"
+            >
+              기부하기
+            </button>
+          </div>
         </div>
         <div className="border border-gray-300 rounded-xl p-6 shadow-lg text-left">
           <h3 className="font-semibold border-b-2 border-gray-300 pb-3 mb-3">
