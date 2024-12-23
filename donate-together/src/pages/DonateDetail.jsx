@@ -12,8 +12,8 @@ function DonateDetail() {
   const [donate, setDonate] = useState(null); // 초기값을 null로 설정
   const [donation, setDonation] = useState(null); // 초기값을 null로 설정
   const [isModalVisible, setIsModalVisible] = useState(false); // 모달의 표시 여부
+  const [dataUpdated, setDataUpdated] = useState(false); // 로컬스토리지 변경 여부
   const { loginSts, goPage, userKakaoData } = useLoginData();
-  console.log("asd");
 
   // 모달 열기
   const openModal = () => {
@@ -44,7 +44,7 @@ function DonateDetail() {
     };
 
     fetchDonate(); // 데이터 fetch 호출
-  }, [id]); // id,donate 값이 바뀔 때마다 호출
+  }, [id,dataUpdated]); // id,dataUpdated 값이 바뀔 때마다 호출
 
   useEffect(() => {
     const fetchDonation = async () => {
@@ -58,7 +58,21 @@ function DonateDetail() {
       }
     };
     fetchDonation();
-  }, [id]); // id,donation 값이 바뀔 때마다 호출
+  }, [id,dataUpdated]); // id,dataUpdated 값이 바뀔 때마다 호출
+
+  // 기부하기 기능 데이터 변경시 리랜더링
+  useEffect(() => {
+    // localStorage의 데이터가 바뀌면 refetch 호출
+    const handleStorageChange = () => {
+      setDataUpdated((prev) => !prev); // dataUpdated 상태 토글
+    };
+
+    // 로컬스토리지의 변화를 감지
+    window.addEventListener("storage", handleStorageChange);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
 
   // 조건부 렌더링: donate가 null 또는 undefined일 경우 렌더링을 하지 않음
   if (!donate) {
@@ -184,7 +198,7 @@ function DonateDetail() {
 
       {/* 모달 팝업 */}
       {isModalVisible && (
-        <Donation setIsModalVisible={setIsModalVisible} donateIdx={id} />
+        <Donation setIsModalVisible={setIsModalVisible} donateIdx={id} setDataUpdated={setDataUpdated} />
       )}
     </div>
   );

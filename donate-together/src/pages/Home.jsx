@@ -79,7 +79,6 @@ function Home(props) {
     }
   };
 
-  
 
   useEffect(() => {
     // localStorage의 데이터가 바뀌면 refetch 호출

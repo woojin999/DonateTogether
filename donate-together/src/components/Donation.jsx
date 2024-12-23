@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useLoginData } from "../context/UserProvider";
 
-function Donation({ setIsModalVisible, donateIdx }) {
+function Donation({ setIsModalVisible, donateIdx, setDataUpdated }) {
   const [donationAmount, setDonationAmount] = useState(0); // 기부 금액 상태
   const [comment, setComment] = useState("");
   const [date, setDate] = useState("");
@@ -62,6 +62,7 @@ function Donation({ setIsModalVisible, donateIdx }) {
     });
     localStorage.setItem("donate-data", JSON.stringify(donateData));
 
+    setDataUpdated((prev) => !prev); // dataUpdated 상태 토글
     setIsModalVisible(false);
 
     alert("기부완료! 감사합니다.");
