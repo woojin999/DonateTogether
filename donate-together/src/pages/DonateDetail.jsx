@@ -44,7 +44,7 @@ function DonateDetail() {
     };
 
     fetchDonate(); // 데이터 fetch 호출
-  }, [id,dataUpdated]); // id,dataUpdated 값이 바뀔 때마다 호출
+  }, [id, dataUpdated]); // id,dataUpdated 값이 바뀔 때마다 호출
 
   useEffect(() => {
     const fetchDonation = async () => {
@@ -58,7 +58,7 @@ function DonateDetail() {
       }
     };
     fetchDonation();
-  }, [id,dataUpdated]); // id,dataUpdated 값이 바뀔 때마다 호출
+  }, [id, dataUpdated]); // id,dataUpdated 값이 바뀔 때마다 호출
 
   // 기부하기 기능 데이터 변경시 리랜더링
   useEffect(() => {
@@ -117,7 +117,7 @@ function DonateDetail() {
                     <div className="flex justify-between items-center mb-2">
                       <p className="text-gray-600">{item.contributor}님</p>
                       <p className="text-lg font-bold text-red-500">
-                        {item.price}원 기부
+                        {new Intl.NumberFormat().format(item.price)}원 기부
                       </p>
                     </div>
                     <div className="flex justify-between items-center">
@@ -198,7 +198,11 @@ function DonateDetail() {
 
       {/* 모달 팝업 */}
       {isModalVisible && (
-        <Donation setIsModalVisible={setIsModalVisible} donateIdx={id} setDataUpdated={setDataUpdated} />
+        <Donation
+          setIsModalVisible={setIsModalVisible}
+          donateIdx={id}
+          setDataUpdated={setDataUpdated}
+        />
       )}
     </div>
   );
