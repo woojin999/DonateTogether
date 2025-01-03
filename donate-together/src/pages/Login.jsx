@@ -7,7 +7,7 @@ function Login() {
   const [userId, setUserId] = useState("guest");
   const [password, setPassword] = useState("1111");
   const [errorMessage, setErrorMessage] = useState("");
-  const { loginSts, setLoginSts, goPage } = useLoginData();
+  const { setLoginSts, goPage } = useLoginData();
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -20,7 +20,6 @@ function Home(props) {
     goPage,
     userKakaoData,
     setUserKakaoData,
-    isLoadingKakao,
     setIsLoadingKakao,
   } = useLoginData(); // 로그인 context
   const [filter, setFilter] = useState({

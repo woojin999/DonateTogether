@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 function CategoryFilter({ category, onChange }) {
-  // const categories = ["전체", "청소년", "환경", "장애인", "사회", "어르신"];
-
   const categories = [
     { title: "전체", img: "ico_all.png" },
     { title: "청소년", img: "ico_kidz.png" },
